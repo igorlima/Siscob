@@ -1,22 +1,17 @@
 package br.ufla.dcc.siscob.model.domain.entity;
 
-import javax.persistence.Column;
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.Table;
+
+import br.ufla.dcc.util.SCHEMAS;
 @Entity
+@Table( name = "periodico", schema = SCHEMAS.SISCOB )
+@DiscriminatorValue(value = Publicacao.Periodico)
 public class Periodico extends Publicacao {
 	
-  @Id
-  @GeneratedValue
-  @Column(name = "Usuario_id")
-  private Long id;
   private int numEdicao;
 	private String mes;
-	
-	public Long getId() {
-    return id;
-  }
 	
 	public int getNumEdicao() {
 		return numEdicao;
@@ -33,4 +28,5 @@ public class Periodico extends Publicacao {
 	public void setMes(String mes) {
 		this.mes = mes;
 	}
+	
 }

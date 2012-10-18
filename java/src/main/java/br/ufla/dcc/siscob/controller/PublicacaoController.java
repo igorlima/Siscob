@@ -16,41 +16,41 @@ import br.ufla.lemaf.commons.model.service.to.ReturnTO;
 @RequestMapping(value = "/publicacao/**")
 public class PublicacaoController {
 	
-  @Inject PublicacaoBO bo;
+  @Inject PublicacaoBO publicacaoBO;
 	
   @RequestMapping(value = "/publicacao", method = RequestMethod.PUT)
 	public ReturnTO salvar(@RequestBody Publicacao publicacao) {
-    return bo.salvar(publicacao);
+    return publicacaoBO.salvar(publicacao);
 	}
   
   @RequestMapping(value = "/publicacao", method = RequestMethod.POST)
   public ReturnTO editar(@RequestBody Publicacao publicacao) {
-    return bo.editar(publicacao);
+    return publicacaoBO.editar(publicacao);
   }
 	
   @RequestMapping(value = "/publicacao", method = RequestMethod.DELETE)
 	public ReturnTO remove(@RequestBody Publicacao publicacao) {
-		return bo.excluir(publicacao);
+		return publicacaoBO.excluir(publicacao);
 	}
   
   @RequestMapping(value = "/publicacao", method = RequestMethod.GET)
   public ReturnTO recuperar(){
-    return bo.recuperar();
+    return publicacaoBO.recuperar();
   }
 	
   @RequestMapping(value = "/publicacao/{id}", method = RequestMethod.GET)
 	public ReturnTO recuperar(@PathVariable Long id){
-		return bo.recuperar(id);
+		return publicacaoBO.recuperar(id);
 	}
 	
   @RequestMapping(value = "/publicacao/autores/{autores}", method = RequestMethod.GET)
 	public ReturnTO recuperarPorAutores(@PathVariable String autores){
-    return bo.recuperarPorAutores(autores);
+    return publicacaoBO.recuperarPorAutores(autores);
 	}
 	
   @RequestMapping(value = "/publicacao/titulo/{titulo}", method = RequestMethod.GET)
 	public ReturnTO recuperarPorTitulo(@PathVariable String titulo){
-    return bo.recuperarPorTitulo(titulo);
+    return publicacaoBO.recuperarPorTitulo(titulo);
 	}
   
 }

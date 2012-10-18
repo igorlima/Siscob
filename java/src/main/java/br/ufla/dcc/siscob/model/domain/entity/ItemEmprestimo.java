@@ -8,8 +8,12 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+
+import br.ufla.dcc.util.SCHEMAS;
 
 @Entity
+@Table( name = "itememprestimo", schema = SCHEMAS.SISCOB )
 public class ItemEmprestimo {
 	
 	@Id

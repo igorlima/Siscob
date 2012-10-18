@@ -5,6 +5,8 @@ import java.util.List;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import org.springframework.transaction.annotation.Transactional;
+
 import br.ufla.dcc.siscob.model.domain.entity.Usuario;
 import br.ufla.dcc.siscob.model.persistence.dao.UsuarioDAO;
 import br.ufla.lemaf.commons.model.persistence.dao.annotation.DAO;
@@ -19,33 +21,40 @@ public class UsuarioBO {
 	@DAO( implementation = DAOImplementation.HIBERNATE )
 	@Inject private UsuarioDAO dao;
 
+	@Transactional
 	public ReturnTO salvar(Usuario usuario) {
     dao.createOrUpdate(usuario);
     return new MessageReturnTO();
   }
   
+	@Transactional
   public ReturnTO editar(Usuario usuario) {
     dao.createOrUpdate(usuario);
     return new MessageReturnTO();
   }
   
+  @Transactional
   public ReturnTO excluir(Usuario usuario) {
     dao.delete(usuario);
     return new MessageReturnTO();
   }
   
+  @Transactional(readOnly=true)
   public ReturnTO recuperar() {
     return new ObjectAndMessageReturnTO<List<Usuario>>(dao.retrieve());
   }
   
+  @Transactional(readOnly=true)
   public ReturnTO recuperar(Long id) {
     return new ObjectAndMessageReturnTO<Usuario>(dao.retrieve(id));
   }
   
+  @Transactional(readOnly=true)
   public ReturnTO recuperarPorNome(String nome) {
     return new ObjectAndMessageReturnTO<List<Usuario>>(dao.listaUsuarioPorNome(nome));
   }
   
+  @Transactional(readOnly=true)
   public ReturnTO recuperarPorCpf(String cpf) {
     return new ObjectAndMessageReturnTO<Usuario>(dao.buscaPorCpf(cpf));
   }

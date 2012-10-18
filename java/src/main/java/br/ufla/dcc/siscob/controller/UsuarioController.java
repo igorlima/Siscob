@@ -1,8 +1,8 @@
 package br.ufla.dcc.siscob.controller;
 
 import javax.inject.Inject;
+import javax.inject.Named;
 
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,8 +13,8 @@ import br.ufla.dcc.siscob.model.service.bo.UsuarioBO;
 import br.ufla.lemaf.commons.model.service.to.ReturnTO;
 
 
-@Controller
-@RequestMapping( value = "usuario" )
+@Named
+@RequestMapping( value = "usuario/**" )
 public class UsuarioController {
 	
 	@Inject UsuarioBO bo;

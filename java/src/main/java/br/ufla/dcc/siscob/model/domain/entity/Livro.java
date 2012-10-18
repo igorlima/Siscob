@@ -1,31 +1,23 @@
 package br.ufla.dcc.siscob.model.domain.entity;
 
-import javax.persistence.Column;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+
+import br.ufla.dcc.util.SCHEMAS;
 
 @Entity
-@DiscriminatorValue(value = "LIVRO")
+@Table( name = "livro", schema = SCHEMAS.SISCOB )
+@DiscriminatorValue(value = Publicacao.Livro)
 public class Livro extends Publicacao{
   
-  @Id
-  @GeneratedValue
-  @Column(name = "Usuario_id")
-  private Long id;
 	private String autores;
 	private int qtdExemplares;
 	
 	@ManyToOne
 	private ItemEmprestimo itemEmprestimo;
 	
-	
-	public Long getId() {
-    return id;
-  }
-
   public ItemEmprestimo getItemEmprestimo() {
     return itemEmprestimo;
   }
@@ -58,7 +50,7 @@ public class Livro extends Publicacao{
 
 	private Livro decrementarQuantidade(int decremento) throws Exception {
 		if (this.qtdExemplares - decremento < 0)
-			throw new Exception("Exemplares j� esgotados");
+			throw new Exception("Exemplares já esgotados");
 
 		this.qtdExemplares -= decremento;
 		return this;

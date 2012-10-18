@@ -4,18 +4,20 @@ import java.util.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
+
+import br.ufla.dcc.util.SCHEMAS;
 
 @Entity
+@Table( name = "usuario", schema = SCHEMAS.SISCOB )
 public class Usuario {
   
 	@Id
 	@GeneratedValue
-	@Column(name = "Usuario_id")
 	private Long id;
 	
 	private String nome;
