@@ -12,23 +12,24 @@ import javax.persistence.OneToMany;
 
 @Entity
 public class Usuario {
+  
 	@Id
 	@GeneratedValue
 	@Column(name = "Usuario_id")
 	private Long id;
-	public Long getId() {
-		return id;
-	}
-	public void setId(Long id) {
-		this.id = id;
-	}
+	
 	private String nome;
 	private String endereco;
 	private String cpf;
 	private String telefone;
 	private Calendar dataPenalizacao;
+	
 	@OneToMany(mappedBy="usuario" , cascade = CascadeType.ALL)
 	private List<Emprestimo> emprestimos;
+	
+	public Long getId() {
+    return id;
+  }
 	
 	public List<Emprestimo> getEmprestimos() {
 		return emprestimos;
