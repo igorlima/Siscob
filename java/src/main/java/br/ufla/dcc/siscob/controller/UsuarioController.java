@@ -15,7 +15,7 @@ import br.ufla.lemaf.commons.model.service.to.ReturnTO;
 
 @Named
 @RequestMapping( value = "usuario/**" )
-public class UsuarioController {
+public class UsuarioController extends ApplicationController {
 	
 	@Inject UsuarioBO bo;
 	

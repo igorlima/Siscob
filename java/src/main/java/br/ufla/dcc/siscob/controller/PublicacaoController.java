@@ -14,7 +14,7 @@ import br.ufla.lemaf.commons.model.service.to.ReturnTO;
 
 @Named
 @RequestMapping(value = "/publicacao/**")
-public class PublicacaoController {
+public class PublicacaoController extends ApplicationController {
 	
   @Inject PublicacaoBO publicacaoBO;
 	

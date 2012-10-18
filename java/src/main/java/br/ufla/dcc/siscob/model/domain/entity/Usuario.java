@@ -10,10 +10,12 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.codehaus.jackson.map.annotate.JsonDeserialize;
 import org.codehaus.jackson.map.annotate.JsonSerialize;
 
+import br.ufla.dcc.util.DateDeserializer;
+import br.ufla.dcc.util.DateSerializer;
 import br.ufla.dcc.util.SCHEMAS;
-import br.ufla.lemaf.commons.util.DateSerializer;
 
 @Entity
 @Table( name = "usuario", schema = SCHEMAS.SISCOB )
@@ -81,6 +83,7 @@ public class Usuario {
 		return dataPenalizacao;
 	}
 	
+	@JsonDeserialize( using = DateDeserializer.class )
 	public void setDataPenalizacao(Date dataPenalizacao) {
 		this.dataPenalizacao = dataPenalizacao;
 	}
