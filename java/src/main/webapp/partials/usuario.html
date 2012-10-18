@@ -11,25 +11,25 @@
   <div class="control-group">
     <label class="control-label" for="inputEndereco">Endereço</label>
     <div class="controls">
-      <input type="password" placeholder="Endereço" ng-model="usuario.endereco">
+      <input type="text" placeholder="Endereço" ng-model="usuario.endereco">
     </div>
   </div>
   <div class="control-group">
     <label class="control-label" for="inputCpf">CPF</label>
     <div class="controls">
-      <input type="password" placeholder="CPF" ng-model="usuario.cpf">
+      <input type="text" placeholder="CPF" ng-model="usuario.cpf">
     </div>
   </div>
   <div class="control-group">
     <label class="control-label" for="inputTelefone">Telefone</label>
     <div class="controls">
-      <input type="password" placeholder="Telefone" ng-model="usuario.telefone">
+      <input type="text" placeholder="Telefone" ng-model="usuario.telefone">
     </div>
   </div>
   <div class="control-group">
     <label class="control-label" for="inputDataPenalizacao">Data Penalização</label>
     <div class="controls">
-      <input type="password" placeholder="Data Penalização" ng-model="usuario.dataPenalizacao">
+      <input type="text" placeholder="Data Penalização" ng-model="usuario.dataPenalizacao">
     </div>
   </div>
   
@@ -44,8 +44,8 @@
 </form>
 
 <legend>Lista do usuários</legend>
-<div class="alert">
-  <strong>Atenção!</strong> Não existe nenhum usuário salvo até o momento.
+<div class="alert" ng-hide="has_usuarios">
+  <strong>Atenção!</strong> Não foi encontrado nenhum usuário salvo.
 </div>
 
 <table class="table table-hover" ng-show="has_usuarios">

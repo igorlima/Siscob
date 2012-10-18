@@ -12,7 +12,8 @@ angular.module( 'usuario', ['usuarioModel'] )
     ng.usuarios = []; 
     
     var listar_todos_usuarios = function() {
-      Usuario.all(function(){
+      Usuario.all(function(data){
+        ng.usuarios = data.returnObject;
         ng.has_usuarios = ng.usuarios.length > 0 ? true : false;
       });
     };
