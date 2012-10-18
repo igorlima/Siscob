@@ -63,10 +63,29 @@
       <td>{{usuario.nome}}</td>
       <td>{{usuario.dataPenalizacao}}</td>
       <td>
-        <button class="btn btn-mini btn-primary" ng-click="editar(usuario)"    ><i class="icon-edit   icon-white"></i></button>
-        <button class="btn btn-mini btn-info"    ng-click="visualizar(usuario)"><i class="icon-search icon-white"></i></button>
-        <button class="btn btn-mini btn-danger"  ng-click="excluir(usuario)"   ><i class="icon-remove icon-white"></i></button>
+        <a class="btn btn-mini btn-primary" ng-click="editar(usuario)"><i class="icon-edit icon-white"></i></a>
+        <a href="#visualizarUsuario" class="btn btn-mini btn-info" data-toggle="modal" ng-click="visualizar(usuario)"><i class="icon-search icon-white"></i></a>
+        <a class="btn btn-mini btn-danger" ng-click="excluir(usuario)"><i class="icon-trash icon-white"></i></a>
       </td>
     </tr>
   </tbody>
 </table>
+
+<div id="visualizarUsuario" class="modal hide fade">
+  <div class="modal-header">
+    <a class="close" data-dismiss="modal" aria-hidden="true">&times;</a>
+    <h3>Visualização do usuário</h3>
+  </div>
+  <div class="modal-body">
+    <address>
+      <strong>{{usuario_para_visualizacao.nome}}</strong><br>
+      <abbr title="Endereço">Endereço:</abbr> {{usuario_para_visualizacao.endereco}} <br>
+      <abbr title="CPF">CPF:</abbr> {{usuario_para_visualizacao.cpf}} <br>
+      <abbr title="Telefone">Telefone:</abbr> {{usuario_para_visualizacao.telefone}} <br>
+      <abbr title="Data da Penalização">Data de penalização:</abbr> {{usuario_para_visualizacao.dataPenalizacao}}
+    </address>
+  </div>
+  <div class="modal-footer">
+    <a class="btn" data-dismiss="modal">Close</a>
+  </div>
+</div>

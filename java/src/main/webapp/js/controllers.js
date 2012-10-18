@@ -53,6 +53,7 @@ angular.module( 'usuario', ['usuarioModel'] )
     };
     
     ng.visualizar = function(usuario) {
+      ng.usuario_para_visualizacao = usuario;
       ng.usuario = {};
     };
     
