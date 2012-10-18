@@ -2,6 +2,7 @@ package br.ufla.dcc.siscob.model.domain.entity;
 
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
@@ -16,6 +17,7 @@ public class Livro extends Publicacao{
 	private int qtdExemplares;
 	
 	@ManyToOne
+	@JoinColumn( name = "ID_ITEMEMPRESTIMO", referencedColumnName = "ID" )
 	private ItemEmprestimo itemEmprestimo;
 	
   public ItemEmprestimo getItemEmprestimo() {

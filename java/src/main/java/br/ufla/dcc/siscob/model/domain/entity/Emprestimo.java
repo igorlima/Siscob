@@ -6,6 +6,7 @@ import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -20,8 +21,10 @@ public class Emprestimo {
 	private int id;
 	private Date dataEmprestimo;
 	private Date dataDevolucao;
+	
 	@NotNull
 	@ManyToOne
+	@JoinColumn( name = "ID_USUARIO", referencedColumnName = "ID" )
 	private Usuario usuario;
 	
 	@OneToMany(  mappedBy = "emprestimo" )

@@ -21,6 +21,7 @@ public class ItemEmprestimo {
 	private Long id;
 	
   private Date dataDevolucao;
+  
 	@ManyToOne( cascade = {CascadeType.PERSIST, CascadeType.MERGE}, targetEntity=Publicacao.class )
 	@JoinColumn(name="ID_PUBLICACAO", nullable=false)
 	private Publicacao publicacao;
