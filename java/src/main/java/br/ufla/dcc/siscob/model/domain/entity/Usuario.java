@@ -1,6 +1,6 @@
 package br.ufla.dcc.siscob.model.domain.entity;
 
-import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -22,7 +22,7 @@ public class Usuario {
 	private String endereco;
 	private String cpf;
 	private String telefone;
-	private Calendar dataPenalizacao;
+	private Date dataPenalizacao;
 	
 	@OneToMany(mappedBy="usuario" , cascade = CascadeType.ALL)
 	private List<Emprestimo> emprestimos;
@@ -61,10 +61,10 @@ public class Usuario {
 	public void setTelefone(String telefone) {
 		this.telefone = telefone;
 	}
-	public Calendar getDataPenalizacao() {
+	public Date getDataPenalizacao() {
 		return dataPenalizacao;
 	}
-	public void setDataPenalizacao(Calendar dataPenalizacao) {
+	public void setDataPenalizacao(Date dataPenalizacao) {
 		this.dataPenalizacao = dataPenalizacao;
 	}
 

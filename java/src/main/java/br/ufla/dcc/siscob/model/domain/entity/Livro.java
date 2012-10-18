@@ -1,20 +1,32 @@
 package br.ufla.dcc.siscob.model.domain.entity;
 
+import javax.persistence.Column;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
 @Entity
 @DiscriminatorValue(value = "LIVRO")
 public class Livro extends Publicacao{
-	
+  
+  @Id
+  @GeneratedValue
+  @Column(name = "Usuario_id")
+  private Long id;
 	private String autores;
 	private int qtdExemplares;
 	
 	@ManyToOne
 	private ItemEmprestimo itemEmprestimo;
 	
-	public ItemEmprestimo getItemEmprestimo() {
+	
+	public Long getId() {
+    return id;
+  }
+
+  public ItemEmprestimo getItemEmprestimo() {
     return itemEmprestimo;
   }
 	

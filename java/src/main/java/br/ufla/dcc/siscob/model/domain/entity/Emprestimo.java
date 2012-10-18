@@ -1,7 +1,7 @@
 package br.ufla.dcc.siscob.model.domain.entity;
 
 import java.util.ArrayList;
-import java.util.GregorianCalendar;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Entity;
@@ -13,9 +13,9 @@ import javax.validation.constraints.NotNull;
 public class Emprestimo {
 	
 	@Id
-	private int numero;
-	private GregorianCalendar dataEmprestimo;
-	private GregorianCalendar dataPrevDevolucao;
+	private int id;
+	private Date dataEmprestimo;
+	private Date dataDevolucao;
 	@NotNull
 	@ManyToOne
 	private Usuario usuario;
@@ -27,24 +27,24 @@ public class Emprestimo {
 		this.itens = itens;
 	}
 	
-	public Emprestimo(int numero, GregorianCalendar dataEmprestimo, GregorianCalendar dataPrevDevolucao, Usuario usuario ){
-		this.numero = numero;
-		this.dataPrevDevolucao = dataPrevDevolucao;
+	public Emprestimo(int id, Date dataEmprestimo, Date dataDevolucao, Usuario usuario ){
+		this.id = id;
+		this.dataDevolucao = dataDevolucao;
 		this.usuario = usuario;
-		dataPrevDevolucao = dataEmprestimo;
+		dataDevolucao = dataEmprestimo;
 		
 	}
 
-	public int getNumero() {
-		return numero;
+	public int getId() {
+		return id;
 	}
 
-	public GregorianCalendar getDataEmprestimo() {
+	public Date getDataEmprestimo() {
 		return dataEmprestimo;
 	}
 
-	public GregorianCalendar getDataPrevDevolucao() {
-		return dataPrevDevolucao;
+	public Date getDataDevolucao() {
+		return dataDevolucao;
 	}
 
 	public Usuario getUsuario() {
@@ -68,7 +68,7 @@ public class Emprestimo {
 	
 	public void devolverItemEmprestimo(ItemEmprestimo itemEmprestimo) throws Exception {
 		if (itens.contains(itemEmprestimo)) {
-			itemEmprestimo.atualizaDevolucao(new GregorianCalendar());
+			itemEmprestimo.atualizaDevolucao(new Date());
 			devolverLivro(itemEmprestimo.getPublicacao());
 			itens.remove( itemEmprestimo );
 		} else {
@@ -94,11 +94,8 @@ public class Emprestimo {
 		return false;
 	}
 	
-	public void setNumero(int numero) {
-		this.numero = numero;
-	}
-	
 	public List<ItemEmprestimo> getItens() {
 		return itens;
 	}
+	
 }

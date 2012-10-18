@@ -1,6 +1,6 @@
 package br.ufla.dcc.siscob.model.domain.entity;
 
-import java.util.GregorianCalendar;
+import java.util.Date;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -16,12 +16,13 @@ public class ItemEmprestimo {
 	@GeneratedValue
 	private Long id;
 	
-  private GregorianCalendar dataDevolucao;
+  private Date dataDevolucao;
 	@ManyToOne( cascade = {CascadeType.PERSIST, CascadeType.MERGE}, targetEntity=Publicacao.class )
 	@JoinColumn(name="ID_PUBLICACAO", nullable=false)
 	private Publicacao publicacao;
 	
 	@ManyToOne(targetEntity = Emprestimo.class)
+	@JoinColumn(name="ID_EMPRESTIMO", nullable=false)
 	private Emprestimo emprestimo;
 	
 	public Long getId() {
@@ -41,11 +42,11 @@ public class ItemEmprestimo {
 		this.dataDevolucao=null;
 	}
 	
-	public void setDataDevolucao(GregorianCalendar dataDevolucao) {
+	public void setDataDevolucao(Date dataDevolucao) {
 		this.dataDevolucao = dataDevolucao;
 	}
 	
-	public GregorianCalendar getDataDevolucao(){
+	public Date getDataDevolucao(){
 		return this.dataDevolucao;
 	}
 	
@@ -53,7 +54,7 @@ public class ItemEmprestimo {
 		return this.publicacao;
 	}
 	
-	public void atualizaDevolucao(GregorianCalendar novaData){
+	public void atualizaDevolucao(Date novaData){
 		this.dataDevolucao = novaData;
 	}
 
