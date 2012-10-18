@@ -10,7 +10,10 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.codehaus.jackson.map.annotate.JsonSerialize;
+
 import br.ufla.dcc.util.SCHEMAS;
+import br.ufla.lemaf.commons.util.DateSerializer;
 
 @Entity
 @Table( name = "usuario", schema = SCHEMAS.SISCOB )
@@ -36,36 +39,48 @@ public class Usuario {
 	public List<Emprestimo> getEmprestimos() {
 		return emprestimos;
 	}
+	
 	public void setEmprestimos(List<Emprestimo> emprestimos) {
 		this.emprestimos = emprestimos;
 	}
+	
 	public String getNome() {
 		return nome;
 	}
+	
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
+	
 	public String getEndereco() {
 		return endereco;
 	}
+	
 	public void setEndereco(String endereco) {
 		this.endereco = endereco;
 	}
+	
 	public String getCpf() {
 		return cpf;
 	}
+	
 	public void setCpf(String cpf) {
 		this.cpf = cpf;
 	}
+	
 	public String getTelefone() {
 		return telefone;
 	}
+	
 	public void setTelefone(String telefone) {
 		this.telefone = telefone;
 	}
+	
+	@JsonSerialize( using = DateSerializer.class )
 	public Date getDataPenalizacao() {
 		return dataPenalizacao;
 	}
+	
 	public void setDataPenalizacao(Date dataPenalizacao) {
 		this.dataPenalizacao = dataPenalizacao;
 	}
