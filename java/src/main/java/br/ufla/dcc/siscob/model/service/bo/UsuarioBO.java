@@ -29,7 +29,12 @@ public class UsuarioBO {
   
   @Transactional
   public ReturnTO editar(Usuario usuario) {
-    dao.createOrUpdate(usuario);
+    dao.retrieve(usuario.getId())
+    .setTelefone(usuario.getTelefone())
+    .setNome(usuario.getNome())
+    .setEndereco(usuario.getEndereco())
+    .setDataPenalizacao(usuario.getDataPenalizacao())
+    .setCpf(usuario.getCpf());
     return new MessageReturnTO();
   }
   

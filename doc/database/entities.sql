@@ -4,8 +4,8 @@ CREATE TABLE siscob.usuario
     ID              INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     NOME            VARCHAR(256) NOT NULL,
     ENDERECO        VARCHAR(256),
-    CPF             VARCHAR(11),
-    TELEFONE        VARCHAR(10),
+    CPF             VARCHAR(20),
+    TELEFONE        VARCHAR(20),
     DATAPENALIZACAO DATE
   )
 ENGINE=InnoDB
@@ -18,7 +18,7 @@ CREATE TABLE siscob.publicacao
     TITULO          VARCHAR(256) NOT NULL,
     EDITORA         VARCHAR(256),
     ANO             VARCHAR(11),
-    TIPO            VARCHAR(10)
+    TIPO            VARCHAR(20)
   )
 ENGINE=InnoDB
 DEFAULT CHARSET=latin1;

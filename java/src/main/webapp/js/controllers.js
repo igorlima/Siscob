@@ -22,24 +22,30 @@ angular.module( 'usuario', ['usuarioModel'] )
     ng.salvar = function() {
       Usuario.save( {}, ng.usuario, 
         function(data){
-          Message.set(false, data.message);
-          ng.usuario = {};
-          listar_todos_usuarios();
+          if (data.status=='ERROR') Message.set(true, data.message);
+          else{
+            Message.set(false, data.message);
+            ng.usuario = {};
+            listar_todos_usuarios();
+          }
         },
         function(data){
-          Message.set(true, data.message);
+          Message.set(true, data);
       });
     };
     
     ng.editar_usuario_selecionado = function() {
-      Usuario.edit( {id:ng.usuario.id}, ng.usuario, 
+      Usuario.update( {}, ng.usuario, 
         function(data){
-          Message.set(false, data.message);
-          ng.usuario = {};
-          listar_todos_usuarios();
+          if (data.status=='ERROR') Message.set(true, data.message);
+          else{
+            Message.set(false, data.message);
+            ng.usuario = {};
+            listar_todos_usuarios();
+          }
         },
         function(data){
-          Message.set(true, data.message);
+          Message.set(true, data);
       });
     };
     
@@ -58,14 +64,17 @@ angular.module( 'usuario', ['usuarioModel'] )
     };
     
     ng.excluir = function(usuario) {
-      Usuario.remove( {id:ng.usuario.id},
+      Usuario.remove( {id:usuario.id},
         function(data) {
-          Message.set(false, data.message);
-          ng.usuario = {};
-          listar_todos_usuarios();
+          if (data.status=='ERROR') Message.set(true, data.message);
+          else{
+            Message.set(false, data.message);
+            ng.usuario = {};
+            listar_todos_usuarios();
+          }
         },
         function(data) {
-          Message.set(true, data.message);
+          Message.set(true, data);
           ng.usuario = {};
       });
     };

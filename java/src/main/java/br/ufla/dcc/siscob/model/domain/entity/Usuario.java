@@ -21,71 +21,82 @@ import br.ufla.dcc.util.SCHEMAS;
 @Table( name = "usuario", schema = SCHEMAS.SISCOB )
 public class Usuario {
   
-	@Id
-	@GeneratedValue
-	private Long id;
-	
-	private String nome;
-	private String endereco;
-	private String cpf;
-	private String telefone;
-	private Date dataPenalizacao;
-	
-	@OneToMany(mappedBy="usuario" , cascade = CascadeType.ALL)
-	private List<Emprestimo> emprestimos;
-	
-	public Long getId() {
+  @Id
+  @GeneratedValue
+  private Long id;
+  
+  private String nome;
+  private String endereco;
+  private String cpf;
+  private String telefone;
+  private Date dataPenalizacao;
+  
+  @OneToMany(mappedBy="usuario" , cascade = CascadeType.ALL)
+  private List<Emprestimo> emprestimos;
+  
+  public Long getId() {
     return id;
   }
-	
-	public List<Emprestimo> getEmprestimos() {
-		return emprestimos;
-	}
-	
-	public void setEmprestimos(List<Emprestimo> emprestimos) {
-		this.emprestimos = emprestimos;
-	}
-	
-	public String getNome() {
-		return nome;
-	}
-	
-	public void setNome(String nome) {
-		this.nome = nome;
-	}
-	
-	public String getEndereco() {
-		return endereco;
-	}
-	
-	public void setEndereco(String endereco) {
-		this.endereco = endereco;
-	}
-	
-	public String getCpf() {
-		return cpf;
-	}
-	
-	public void setCpf(String cpf) {
-		this.cpf = cpf;
-	}
-	
-	public String getTelefone() {
-		return telefone;
-	}
-	
-	public void setTelefone(String telefone) {
-		this.telefone = telefone;
-	}
-	
-	@JsonSerialize( using = DateSerializer.class )
-	public Date getDataPenalizacao() {
-		return dataPenalizacao;
-	}
-	
-	@JsonDeserialize( using = DateDeserializer.class )
-	public void setDataPenalizacao(Date dataPenalizacao) {
-		this.dataPenalizacao = dataPenalizacao;
-	}
+  
+  public Usuario setId(Long id) {
+    this.id = id;
+    return this;
+  }
+  
+  public List<Emprestimo> getEmprestimos() {
+    return emprestimos;
+  }
+  
+  public Usuario setEmprestimos(List<Emprestimo> emprestimos) {
+    this.emprestimos = emprestimos;
+    return this;
+  }
+  
+  public String getNome() {
+    return nome;
+  }
+  
+  public Usuario setNome(String nome) {
+    this.nome = nome;
+    return this;
+  }
+  
+  public String getEndereco() {
+    return endereco;
+  }
+  
+  public Usuario setEndereco(String endereco) {
+    this.endereco = endereco;
+    return this;
+  }
+  
+  public String getCpf() {
+    return cpf;
+  }
+  
+  public Usuario setCpf(String cpf) {
+    this.cpf = cpf;
+    return this;
+  }
+  
+  public String getTelefone() {
+    return telefone;
+  }
+  
+  public Usuario setTelefone(String telefone) {
+    this.telefone = telefone;
+    return this;
+  }
+  
+  @JsonSerialize( using = DateSerializer.class )
+  public Date getDataPenalizacao() {
+    return dataPenalizacao;
+  }
+  
+  @JsonDeserialize( using = DateDeserializer.class )
+  public Usuario setDataPenalizacao(Date dataPenalizacao) {
+    this.dataPenalizacao = dataPenalizacao;
+    return this;
+  }
 
 }
