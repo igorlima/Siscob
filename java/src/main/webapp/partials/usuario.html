@@ -1,44 +1,54 @@
+
+<legend>Usuário</legend>
+
 <form class="form-horizontal">
-  <legend>Usuário</legend>
   <div class="control-group">
     <label class="control-label" for="inputNome">Nome</label>
     <div class="controls">
-      <input type="text" id="inputNome" placeholder="Nome">
+      <input type="text" placeholder="Nome" ng-model="usuario.nome">
     </div>
   </div>
   <div class="control-group">
     <label class="control-label" for="inputEndereco">Endereço</label>
     <div class="controls">
-      <input type="password" id="inputEndereco" placeholder="Endereço">
+      <input type="password" placeholder="Endereço" ng-model="usuario.endereco">
     </div>
   </div>
   <div class="control-group">
     <label class="control-label" for="inputCpf">CPF</label>
     <div class="controls">
-      <input type="password" id="inputCpf" placeholder="CPF">
+      <input type="password" placeholder="CPF" ng-model="usuario.cpf">
     </div>
   </div>
   <div class="control-group">
     <label class="control-label" for="inputTelefone">Telefone</label>
     <div class="controls">
-      <input type="password" id="inputTelefone" placeholder="Telefone">
+      <input type="password" placeholder="Telefone" ng-model="usuario.telefone">
     </div>
   </div>
   <div class="control-group">
     <label class="control-label" for="inputDataPenalizacao">Data Penalização</label>
     <div class="controls">
-      <input type="password" id="inputDataPenalizacao" placeholder="Data Penalização">
+      <input type="password" placeholder="Data Penalização" ng-model="usuario.dataPenalizacao">
     </div>
   </div>
   
   <div class="control-group">
-    <div class="controls">
-      <button type="submit" class="btn btn-inverse"> <i class="icon-plus icon-white"></i> Adicionar</button>
+    <div class="controls" ng-hide="usuario.id">
+      <a class="btn btn-inverse" ng-click="salvar()"> <i class="icon-plus icon-white"></i> Salvar</a>
+    </div>
+    <div class="controls" ng-show="usuario.id">
+      <a class="btn btn-inverse" ng-click="editar_usuario_selecionado()"> <i class="icon-plus icon-white"></i> Editar</a>
     </div>
   </div>
 </form>
 
-<table class="table table-hover">
+<legend>Lista do usuários</legend>
+<div class="alert">
+  <strong>Atenção!</strong> Não existe nenhum usuário salvo até o momento.
+</div>
+
+<table class="table table-hover" ng-show="has_usuarios">
   <thead>
     <tr>
       <th>#</th>
@@ -48,34 +58,14 @@
     </tr>
   </thead>
   <tbody>
-    <tr>
-      <td>1</td>
-      <td>Mark</td>
-      <td>@mdo</td>
+    <tr ng-repeat="usuario in usuarios">
+      <td>{{usuario.id}}</td>
+      <td>{{usuario.nome}}</td>
+      <td>{{usuario.dataPenalizacao}}</td>
       <td>
-        <button class="btn btn-mini btn-primary"><i class="icon-edit icon-white"></i></button>
-        <button class="btn btn-mini btn-info"><i class="icon-search icon-white"></i></button>
-        <button class="btn btn-mini btn-danger"><i class="icon-remove icon-white"></i></button>
-      </td>
-    </tr>
-    <tr>
-      <td>2</td>
-      <td>Jacob</td>
-      <td>@fat</td>
-      <td>
-        <button class="btn btn-mini btn-primary"><i class="icon-edit icon-white"></i></button>
-        <button class="btn btn-mini btn-info"><i class="icon-search icon-white"></i></button>
-        <button class="btn btn-mini btn-danger"><i class="icon-remove icon-white"></i></button>
-      </td>
-    </tr>
-    <tr>
-      <td>3</td>
-      <td>Larry the Bird</td>
-      <td>@twitter</td>
-      <td>
-        <button class="btn btn-mini btn-primary"><i class="icon-edit icon-white"></i></button>
-        <button class="btn btn-mini btn-info"><i class="icon-search icon-white"></i></button>
-        <button class="btn btn-mini btn-danger"><i class="icon-remove icon-white"></i></button>
+        <button class="btn btn-mini btn-primary" ng-click="editar(usuario)"    ><i class="icon-edit   icon-white"></i></button>
+        <button class="btn btn-mini btn-info"    ng-click="visualizar(usuario)"><i class="icon-search icon-white"></i></button>
+        <button class="btn btn-mini btn-danger"  ng-click="excluir(usuario)"   ><i class="icon-remove icon-white"></i></button>
       </td>
     </tr>
   </tbody>

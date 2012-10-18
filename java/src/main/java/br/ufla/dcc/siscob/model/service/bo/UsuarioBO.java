@@ -18,24 +18,24 @@ import br.ufla.lemaf.commons.model.service.to.ReturnTO;
 @Named
 public class UsuarioBO {
 
-	@DAO( implementation = DAOImplementation.HIBERNATE )
-	@Inject private UsuarioDAO dao;
+  @DAO( implementation = DAOImplementation.HIBERNATE )
+  @Inject private UsuarioDAO dao;
 
-	@Transactional
-	public ReturnTO salvar(Usuario usuario) {
+  @Transactional
+  public ReturnTO salvar(Usuario usuario) {
     dao.createOrUpdate(usuario);
     return new MessageReturnTO();
   }
   
-	@Transactional
+  @Transactional
   public ReturnTO editar(Usuario usuario) {
     dao.createOrUpdate(usuario);
     return new MessageReturnTO();
   }
   
   @Transactional
-  public ReturnTO excluir(Usuario usuario) {
-    dao.delete(usuario);
+  public ReturnTO excluir(Long id) {
+    dao.delete(dao.retrieve(id));
     return new MessageReturnTO();
   }
   

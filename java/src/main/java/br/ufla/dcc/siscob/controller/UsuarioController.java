@@ -16,22 +16,22 @@ import br.ufla.lemaf.commons.model.service.to.ReturnTO;
 @Named
 @RequestMapping( value = "usuario/**" )
 public class UsuarioController extends ApplicationController {
-	
-	@Inject UsuarioBO bo;
-	
-	@RequestMapping(value = "/usuario", method = RequestMethod.PUT)
+  
+  @Inject UsuarioBO bo;
+  
+  @RequestMapping(value = "/usuario", method = RequestMethod.POST)
   public ReturnTO salvar(@RequestBody Usuario usuario) {
     return bo.salvar(usuario);
   }
   
-  @RequestMapping(value = "/usuario", method = RequestMethod.POST)
+  @RequestMapping(value = "/usuario", method = RequestMethod.PUT)
   public ReturnTO editar(@RequestBody Usuario usuario) {
     return bo.editar(usuario);
   }
   
-  @RequestMapping(value = "/usuario", method = RequestMethod.DELETE)
-  public ReturnTO remove(@RequestBody Usuario usuario) {
-    return bo.excluir(usuario);
+  @RequestMapping(value = "/usuario/{id}", method = RequestMethod.DELETE)
+  public ReturnTO remove(@PathVariable Long id) {
+    return bo.excluir(id);
   }
   
   @RequestMapping(value = "/usuario", method = RequestMethod.GET)
@@ -43,15 +43,15 @@ public class UsuarioController extends ApplicationController {
   public ReturnTO recuperar(@PathVariable Long id){
     return bo.recuperar(id);
   }
-	
+  
   @RequestMapping(value = "/usuario/nome/{nome}", method = RequestMethod.GET)
-	public ReturnTO buscaPorNome(@PathVariable String nome){
+  public ReturnTO buscaPorNome(@PathVariable String nome){
     return bo.recuperarPorNome(nome);
-	}
+  }
   
   @RequestMapping(value = "/usuario/cpf/{cpf}", method = RequestMethod.GET)
   public ReturnTO buscaPorCpf(@PathVariable String cpf){
     return bo.recuperarPorCpf(cpf);
   }
-	
+  
 }
