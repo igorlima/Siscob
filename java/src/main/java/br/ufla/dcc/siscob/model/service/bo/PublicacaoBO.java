@@ -8,7 +8,11 @@ import javax.inject.Named;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.PathVariable;
 
+import br.ufla.dcc.siscob.model.domain.entity.LivroAttr;
+import br.ufla.dcc.siscob.model.domain.entity.PeriodicoAttr;
 import br.ufla.dcc.siscob.model.domain.entity.Publicacao;
+import br.ufla.dcc.siscob.model.persistence.dao.LivroAttrDAO;
+import br.ufla.dcc.siscob.model.persistence.dao.PeriodicoAttrDAO;
 import br.ufla.dcc.siscob.model.persistence.dao.PublicacaoDAO;
 import br.ufla.lemaf.commons.model.persistence.dao.annotation.DAO;
 import br.ufla.lemaf.commons.model.persistence.dao.annotation.DAOImplementation;
@@ -21,6 +25,12 @@ public class PublicacaoBO {
 
   @DAO( implementation = DAOImplementation.HIBERNATE )
   @Inject private PublicacaoDAO dao;
+  
+  @DAO( implementation = DAOImplementation.HIBERNATE )
+  @Inject private LivroAttrDAO livroAttrDAO;
+  
+  @DAO( implementation = DAOImplementation.HIBERNATE )
+  @Inject private PeriodicoAttrDAO PeriodicoAttrDAO;
 
   @Transactional
   public ReturnTO salvar(Publicacao publicacao) {
@@ -30,7 +40,17 @@ public class PublicacaoBO {
   
   @Transactional
   public ReturnTO editar(Publicacao publicacao) {
-    dao.createOrUpdate(publicacao);
+    dao.retrieve(publicacao.getId())
+    .setAno(publicacao.getAno())
+    .setEditora(publicacao.getEditora())
+    .setTipo(publicacao.getTipo()==null?Publicacao.Publicacao:publicacao.getTipo())
+    .setTitulo(publicacao.getTitulo());
+    
+    if (Publicacao.Livro.equals(publicacao.getTipo())) 
+      livroAttrDAO.createOrUpdate( new LivroAttr(publicacao) );
+    else if (Publicacao.Periodico.equals(publicacao.getTipo()))
+      PeriodicoAttrDAO.createOrUpdate( new PeriodicoAttr(publicacao) );
+    
     return new MessageReturnTO();
   }
   
