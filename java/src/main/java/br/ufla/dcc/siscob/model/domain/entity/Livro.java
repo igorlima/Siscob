@@ -6,19 +6,34 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.codehaus.jackson.annotate.JsonIgnoreProperties;
+
 import br.ufla.dcc.util.SCHEMAS;
 
 @Entity
 @Table( name = "livro", schema = SCHEMAS.SISCOB )
 @DiscriminatorValue(value = Publicacao.Livro)
+@JsonIgnoreProperties(ignoreUnknown=true)
 public class Livro extends Publicacao{
-  
+
 	private String autores;
 	private int qtdExemplares;
 	
 	@ManyToOne
 	@JoinColumn( name = "ID_ITEMEMPRESTIMO", referencedColumnName = "ID" )
 	private ItemEmprestimo itemEmprestimo;
+	
+	public Livro() {
+	  
+	}
+	
+	public Livro(Publicacao publicacao) {
+	  this
+	  .setId(publicacao.getId())
+	  .setTitulo(publicacao.getTitulo())
+	  .setEditora(publicacao.getEditora())
+	  .setAno(publicacao.getAno());
+	}
 	
   public ItemEmprestimo getItemEmprestimo() {
     return itemEmprestimo;
@@ -28,16 +43,18 @@ public class Livro extends Publicacao{
 		return autores;
 	}
 	
-  public void setAutores(String autores) {
+  public Livro setAutores(String autores) {
 		this.autores = autores;
+		return this;
 	}
 	
 	public Integer getQtdExemplares() {
 		return qtdExemplares;
 	}
 	
-	public void setQtdExemplares(Integer qtdExemplares) {
+	public Livro setQtdExemplares(Integer qtdExemplares) {
 		this.qtdExemplares = qtdExemplares;
+		return this;
 	}
 	
 	public Livro incrementarQuantidade() {

@@ -15,7 +15,7 @@ factory('Usuario', ['$resource', function($resource){
 
 angular.module('publicacaoModel', ['ngResource']).
 factory('Publicacao', ['$resource', function($resource){
-  return $resource('publicacao/:id', {}, {
+  return $resource('publicacao/:id/:tipo', {}, {
     all:    {method:'GET'   , params:{}},
     save:   {method:'POST'  , params:{}},
     update: {method:'PUT'   , params:{}},

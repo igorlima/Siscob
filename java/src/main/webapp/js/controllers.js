@@ -97,7 +97,7 @@ function(ng, Publicacao) {
   listar_todas_publicacoes();
   
   ng.salvar = function() {
-    Publicacao.save( {}, ng.publicacao, 
+    Publicacao.save( {tipo:ng.publicacao.tipo}, ng.publicacao, 
       function(data){
         if (data.status=='ERROR') Message.set(true, data.message);
         else{
@@ -112,7 +112,7 @@ function(ng, Publicacao) {
   };
   
   ng.editar_publicacao_selecionado = function() {
-    Publicacao.update( {}, ng.publicacao, 
+    Publicacao.update( {tipo:ng.publicacao.tipo}, ng.publicacao, 
       function(data){
         if (data.status=='ERROR') Message.set(true, data.message);
         else{
@@ -144,7 +144,7 @@ function(ng, Publicacao) {
   };
   
   ng.excluir = function(publicacao) {
-    Publicacao.remove( {id:publicacao.id},
+    Publicacao.remove( {id:publicacao.id, tipo:publicacao.tipo},
       function(data) {
         if (data.status=='ERROR') Message.set(true, data.message);
         else{

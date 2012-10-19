@@ -27,4 +27,8 @@ public class PublicacaoHibernateDAO extends HibernateDAO<Publicacao, Long> imple
 		return query.getResultList();  
 	}
 	
+	public void evict(Publicacao publicacao) {
+    this.getSession().evict(publicacao);
+  }
+	
 }

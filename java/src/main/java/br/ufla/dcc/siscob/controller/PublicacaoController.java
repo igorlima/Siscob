@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import br.ufla.dcc.siscob.model.domain.entity.Livro;
+import br.ufla.dcc.siscob.model.domain.entity.Periodico;
 import br.ufla.dcc.siscob.model.domain.entity.Publicacao;
 import br.ufla.dcc.siscob.model.service.bo.PublicacaoBO;
 import br.ufla.lemaf.commons.model.service.to.ReturnTO;
@@ -23,13 +25,43 @@ public class PublicacaoController extends ApplicationController {
     return publicacaoBO.salvar(publicacao);
   }
   
+  @RequestMapping(value = "/publicacao/LIVRO", method = RequestMethod.POST)
+  public ReturnTO salvarLivro(@RequestBody Livro livro) {
+    return publicacaoBO.salvar(livro);
+  }
+  
+  @RequestMapping(value = "/publicacao/PERIODICO", method = RequestMethod.POST)
+  public ReturnTO salvarPeriodico(@RequestBody Periodico periodico) {
+    return publicacaoBO.salvar(periodico);
+  }
+  
   @RequestMapping(value = "/publicacao", method = RequestMethod.PUT)
   public ReturnTO editar(@RequestBody Publicacao publicacao) {
     return publicacaoBO.editar(publicacao);
   }
   
+  @RequestMapping(value = "/publicacao/LIVRO", method = RequestMethod.PUT)
+  public ReturnTO editarLivro(@RequestBody Livro livro) {
+    return publicacaoBO.editar(livro);
+  }
+  
+  @RequestMapping(value = "/publicacao/PERIODICO", method = RequestMethod.PUT)
+  public ReturnTO editarPeriodico(@RequestBody Periodico periodico) {
+    return publicacaoBO.editar(periodico);
+  }
+  
   @RequestMapping(value = "/publicacao/{id}", method = RequestMethod.DELETE)
   public ReturnTO remove(@PathVariable Long id) {
+    return publicacaoBO.excluir(id);
+  }
+  
+  @RequestMapping(value = "/publicacao/{id}/LIVRO", method = RequestMethod.DELETE)
+  public ReturnTO removeLivro(@PathVariable Long id) {
+    return publicacaoBO.excluir(id);
+  }
+  
+  @RequestMapping(value = "/publicacao/{id}/PERIODICO", method = RequestMethod.DELETE)
+  public ReturnTO removePeriodico(@PathVariable Long id) {
     return publicacaoBO.excluir(id);
   }
   

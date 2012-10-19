@@ -19,7 +19,7 @@ import br.ufla.dcc.util.SCHEMAS;
 @Inheritance(strategy = InheritanceType.JOINED)
 @DiscriminatorColumn(name = "tipo", discriminatorType = DiscriminatorType.STRING)
 @DiscriminatorValue(value=Publicacao.Publicacao)
-public class Publicacao{
+public class Publicacao {
   
   @Transient public static final String Livro = "LIVRO";
   @Transient public static final String Periodico = "PERIODICO";
@@ -31,47 +31,52 @@ public class Publicacao{
 	private String titulo;
 	private String editora;
 	private String ano;
-	@Column( insertable=false, updatable=false, nullable=false )
+	@Column(nullable=false)
 	private String tipo;
 	
 	public Long getId() {
     return id;
   }
   
-  public void setId(Long id) {
+  public Publicacao setId(Long id) {
     this.id = id;
+    return this;
   }
   
   public String getTipo() {
     return tipo;
   }
   
-  public void setTipo(String tipo) {
+  public Publicacao setTipo(String tipo) {
     this.tipo = tipo;
+    return this;
   }
   
 	public String getTitulo() {
 		return titulo;
 	}
 	
-	public void setTitulo(String titulo) {
+	public Publicacao setTitulo(String titulo) {
 		this.titulo = titulo;
+		return this;
 	}
 	
 	public String getEditora() {
 		return editora;
 	}
 	
-	public void setEditora(String editora) {
+	public Publicacao setEditora(String editora) {
 		this.editora = editora;
+		return this;
 	}
 	
 	public String getAno() {
 		return ano;
 	}
 	
-	public void setAno(String ano) {
+	public Publicacao setAno(String ano) {
 		this.ano = ano;
+		return this;
 	}
 
 }

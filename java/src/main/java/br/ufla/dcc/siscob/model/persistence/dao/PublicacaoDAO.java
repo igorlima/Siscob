@@ -9,5 +9,6 @@ public interface PublicacaoDAO extends DAO<Publicacao, Long> {
   
   List<Publicacao> buscarPorAutores(String autores);
   List<Publicacao> buscarPorTitulo(String titulo);
+  void evict(Publicacao publicacao);
 
 }
