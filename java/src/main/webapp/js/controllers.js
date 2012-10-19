@@ -84,7 +84,7 @@ function(ng, Usuario) {
 .controller( 'PublicacaoCtrl', ['$scope','Publicacao', 
 function(ng, Publicacao) {
   
-  ng.publicacao = {};
+  ng.publicacao = {tipo:'LIVRO'};
   
   ng.publicacoes = []; 
   
@@ -102,7 +102,7 @@ function(ng, Publicacao) {
         if (data.status=='ERROR') Message.set(true, data.message);
         else{
           Message.set(false, data.message);
-          ng.publicacao = {};
+          ng.publicacao = {tipo:'LIVRO'};
           listar_todas_publicacoes();
         }
       },
@@ -117,7 +117,7 @@ function(ng, Publicacao) {
         if (data.status=='ERROR') Message.set(true, data.message);
         else{
           Message.set(false, data.message);
-          ng.publicacao = {};
+          ng.publicacao = {tipo:'LIVRO'};
           listar_todas_publicacoes();
         }
       },
@@ -127,15 +127,20 @@ function(ng, Publicacao) {
   };
   
   ng.editar = function(publicacao) {
-    ng.publicacao.id      = publicacao.id;
-    ng.publicacao.titulo  = publicacao.titulo;
-    ng.publicacao.editora = publicacao.editora;
-    ng.publicacao.ano     = publicacao.ano;
+    ng.publicacao.id            = publicacao.id;
+    ng.publicacao.titulo        = publicacao.titulo;
+    ng.publicacao.editora       = publicacao.editora;
+    ng.publicacao.ano           = publicacao.ano;
+    ng.publicacao.tipo          = publicacao.tipo;
+    ng.publicacao.autores       = publicacao.autores;
+    ng.publicacao.qtdExemplares = publicacao.qtdExemplares;
+    ng.publicacao.numEdicao     = publicacao.numEdicao;
+    ng.publicacao.mes           = publicacao.mes;
   };
   
   ng.visualizar = function(publicacao) {
     ng.publicacao_para_visualizacao = publicacao;
-    ng.publicacao = {};
+    ng.publicacao = {tipo:'LIVRO'};
   };
   
   ng.excluir = function(publicacao) {
@@ -144,13 +149,13 @@ function(ng, Publicacao) {
         if (data.status=='ERROR') Message.set(true, data.message);
         else{
           Message.set(false, data.message);
-          ng.publicacao = {};
+          ng.publicacao = {tipo:'LIVRO'};
           listar_todas_publicacoes();
         }
       },
       function(data) {
         Message.set(true, data);
-        ng.publicacao = {};
+        ng.publicacao = {tipo:'LIVRO'};
     });
   };
 

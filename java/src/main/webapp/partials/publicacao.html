@@ -21,6 +21,47 @@
     </div>
   </div>
   <div class="control-group">
+    <label class="control-label" for="inputTipo">Tipo</label>
+    <div class="controls">
+		  <label class="radio inline">
+			  <input type="radio" name="optionsRadios" value="LIVRO" ng-model="publicacao.tipo">
+			  Livro
+			</label>
+			<label class="radio inline">
+			  <input type="radio" name="optionsRadios" value="PERIODICO" ng-model="publicacao.tipo">
+			  Periódico
+			</label>
+    </div>
+  </div>
+  <div class="control-group" ng-show="publicacao.tipo=='LIVRO'">
+    <label class="control-label" for="inputAutores">Autores</label>
+    <div class="controls">
+      <input type="text" placeholder="Autores" ng-model="publicacao.autores">
+    </div>
+  </div>
+  <div class="control-group" ng-show="publicacao.tipo=='LIVRO'">
+    <label class="control-label" for="inputQuantidade">Quantidade</label>
+    <div class="controls">
+      <input type="text" placeholder="Quantidade" ng-model="publicacao.qtdExemplares">
+    </div>
+  </div>
+  <div class="control-group" ng-show="publicacao.tipo=='PERIODICO'">
+    <label class="control-label" for="inputNumEdicao">Nº edição</label>
+    <div class="controls">
+      <input type="text" placeholder="Nº Edição" ng-model="publicacao.numEdicao">
+    </div>
+  </div>
+  <div class="control-group" ng-show="publicacao.tipo=='PERIODICO'">
+    <label class="control-label" for="inputMes">Mês</label>
+    <div class="controls">
+      <input type="text" placeholder="mês" ng-model="publicacao.mes">
+    </div>
+  </div>
+  
+  
+  
+  
+  <div class="control-group">
     <div class="controls" ng-hide="publicacao.id">
       <a class="btn btn-inverse" ng-click="salvar()"> <i class="icon-plus icon-white"></i> Salvar</a>
     </div>
