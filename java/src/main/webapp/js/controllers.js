@@ -81,7 +81,7 @@ function(ng, Usuario) {
 
 }])
 
-.controller( 'PublicacaoCtrl', ['$scope''Publicacao', 
+.controller( 'PublicacaoCtrl', ['$scope','Publicacao', 
 function(ng, Publicacao) {
   
   ng.publicacao = {};
