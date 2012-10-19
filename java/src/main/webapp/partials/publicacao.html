@@ -109,6 +109,15 @@
       <strong>{{publicacao_para_visualizacao.titulo}}</strong><br>
       <abbr title="Editora">Editora:</abbr> {{publicacao_para_visualizacao.editora}} <br>
       <abbr title="Ano">Ano:</abbr> {{publicacao_para_visualizacao.ano}} <br>
+      <abbr title="Tipo">Tipo:</abbr> {{publicacao_para_visualizacao.tipo}} <br>
+      <span ng-show="publicacao.tipo=='LIVRO'">
+	      <abbr title="Autores">Autores:</abbr> {{publicacao_para_visualizacao.autores}} <br>
+	      <abbr title="Quantidade">Quantidade:</abbr> {{publicacao_para_visualizacao.qtdExemplares}} <br>
+      </span>
+      <span ng-show="publicacao.tipo=='PERIODICO'">
+	      <abbr title="Nº Edição">Nº edição:</abbr> {{publicacao_para_visualizacao.numEdicao}} <br>
+	      <abbr title="Mês">Mês:</abbr> {{publicacao_para_visualizacao.mes}} <br>
+      </span>
     </address>
   </div>
   <div class="modal-footer">
