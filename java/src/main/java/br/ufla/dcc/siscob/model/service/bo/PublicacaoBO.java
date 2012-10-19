@@ -19,45 +19,45 @@ import br.ufla.lemaf.commons.model.service.to.ReturnTO;
 @Named
 public class PublicacaoBO {
 
-	@DAO( implementation = DAOImplementation.HIBERNATE )
-	@Inject private PublicacaoDAO publicacaoDAO;
+  @DAO( implementation = DAOImplementation.HIBERNATE )
+  @Inject private PublicacaoDAO dao;
 
-	@Transactional
-	public ReturnTO salvar(Publicacao publicacao) {
-	  publicacaoDAO.createOrUpdate(publicacao);
-	  return new MessageReturnTO();
-	}
-	
-	@Transactional
-	public ReturnTO editar(Publicacao publicacao) {
-    publicacaoDAO.createOrUpdate(publicacao);
+  @Transactional
+  public ReturnTO salvar(Publicacao publicacao) {
+    dao.createOrUpdate(publicacao);
     return new MessageReturnTO();
   }
-	
-	@Transactional
-	public ReturnTO excluir(Publicacao publicacao) {
-	  publicacaoDAO.delete(publicacao);
+  
+  @Transactional
+  public ReturnTO editar(Publicacao publicacao) {
+    dao.createOrUpdate(publicacao);
     return new MessageReturnTO();
   }
-	
-	@Transactional(readOnly=true)
-	public ReturnTO recuperar() {
-    return new ObjectAndMessageReturnTO<List<Publicacao>>(publicacaoDAO.retrieve());
+  
+  @Transactional
+  public ReturnTO excluir(Long id) {
+    dao.delete( dao.retrieve(id) );
+    return new MessageReturnTO();
   }
-	
-	@Transactional(readOnly=true)
-	public ReturnTO recuperar(Long id) {
-	  return new ObjectAndMessageReturnTO<Publicacao>(publicacaoDAO.retrieve(id));
-	}
-	
-	@Transactional(readOnly=true)
-	public ReturnTO recuperarPorAutores(String autores) {
-	  return new ObjectAndMessageReturnTO<List<Publicacao>>(publicacaoDAO.buscarPorAutores(autores));
-	}
-	
-	@Transactional(readOnly=true)
-	public ReturnTO recuperarPorTitulo(@PathVariable String titulo) {
-	  return new ObjectAndMessageReturnTO<List<Publicacao>>(publicacaoDAO.buscarPorTitulo(titulo));
-	}
-	
+  
+  @Transactional(readOnly=true)
+  public ReturnTO recuperar() {
+    return new ObjectAndMessageReturnTO<List<Publicacao>>(dao.retrieve());
+  }
+  
+  @Transactional(readOnly=true)
+  public ReturnTO recuperar(Long id) {
+    return new ObjectAndMessageReturnTO<Publicacao>(dao.retrieve(id));
+  }
+  
+  @Transactional(readOnly=true)
+  public ReturnTO recuperarPorAutores(String autores) {
+    return new ObjectAndMessageReturnTO<List<Publicacao>>(dao.buscarPorAutores(autores));
+  }
+  
+  @Transactional(readOnly=true)
+  public ReturnTO recuperarPorTitulo(@PathVariable String titulo) {
+    return new ObjectAndMessageReturnTO<List<Publicacao>>(dao.buscarPorTitulo(titulo));
+  }
+  
 }

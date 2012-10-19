@@ -40,17 +40,17 @@ public class UsuarioController extends ApplicationController {
   }
   
   @RequestMapping(value = "/usuario/{id}", method = RequestMethod.GET)
-  public ReturnTO recuperar(@PathVariable Long id){
+  public ReturnTO recuperar(@PathVariable Long id) {
     return bo.recuperar(id);
   }
   
   @RequestMapping(value = "/usuario/nome/{nome}", method = RequestMethod.GET)
-  public ReturnTO buscaPorNome(@PathVariable String nome){
+  public ReturnTO buscaPorNome(@PathVariable String nome) {
     return bo.recuperarPorNome(nome);
   }
   
   @RequestMapping(value = "/usuario/cpf/{cpf}", method = RequestMethod.GET)
-  public ReturnTO buscaPorCpf(@PathVariable String cpf){
+  public ReturnTO buscaPorCpf(@PathVariable String cpf) {
     return bo.recuperarPorCpf(cpf);
   }
   
