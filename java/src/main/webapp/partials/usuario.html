@@ -26,12 +26,6 @@
       <input type="text" placeholder="Telefone" ng-model="usuario.telefone">
     </div>
   </div>
-  <div class="control-group">
-    <label class="control-label" for="inputDataPenalizacao">Data Penalização</label>
-    <div class="controls">
-      <input type="text" placeholder="Data Penalização" ng-model="usuario.dataPenalizacao">
-    </div>
-  </div>
   
   <div class="control-group">
     <div class="controls" ng-hide="usuario.id">
@@ -53,7 +47,7 @@
     <tr>
       <th>#</th>
       <th>Nome</th>
-      <th>Data Penalização</th>
+      <th>Telefone</th>
       <th>Ações</th>
     </tr>
   </thead>
@@ -61,7 +55,7 @@
     <tr ng-repeat="usuario in usuarios">
       <td>{{usuario.id}}</td>
       <td>{{usuario.nome}}</td>
-      <td>{{usuario.dataPenalizacao}}</td>
+      <td>{{usuario.telefone}}</td>
       <td>
         <a class="btn btn-mini btn-primary" ng-click="editar(usuario)"><i class="icon-edit icon-white"></i></a>
         <a href="#visualizarUsuario" class="btn btn-mini btn-info" data-toggle="modal" ng-click="visualizar(usuario)"><i class="icon-search icon-white"></i></a>
@@ -82,7 +76,6 @@
       <abbr title="Endereço">Endereço:</abbr> {{usuario_para_visualizacao.endereco}} <br>
       <abbr title="CPF">CPF:</abbr> {{usuario_para_visualizacao.cpf}} <br>
       <abbr title="Telefone">Telefone:</abbr> {{usuario_para_visualizacao.telefone}} <br>
-      <abbr title="Data da Penalização">Data de penalização:</abbr> {{usuario_para_visualizacao.dataPenalizacao}}
     </address>
   </div>
   <div class="modal-footer">

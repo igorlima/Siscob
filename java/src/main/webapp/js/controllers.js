@@ -55,7 +55,6 @@ function(ng, Usuario) {
     ng.usuario.endereco        = usuario.endereco;
     ng.usuario.cpf             = usuario.cpf;
     ng.usuario.telefone        = usuario.telefone;
-    ng.usuario.dataPenalizacao = usuario.dataPenalizacao;
   };
   
   ng.visualizar = function(usuario) {
