@@ -74,11 +74,11 @@
       <td>{{emprestimo.usuario.nome}}</td>
       <td>{{emprestimo.dataDevolucao}}</td>
       <td>
-        <a class="btn btn-mini btn-primary" ng-click="editar(emprestimo)"><i class="icon-edit icon-white"></i></a>
-        <a href="#visualizarItemEmprestimo" class="btn btn-mini btn-info" data-toggle="modal" ng-click="visualizar(emprestimo)"><i class="icon-search icon-white"></i></a>
-        <a class="btn btn-mini btn-warning" ng-click="devolver(emprestimo)"><i class="icon-download-alt icon-white"></i></a>
-        <a class="btn btn-mini btn-success" ng-click="renovar(emprestimo)"><i class="icon-bookmark icon-white"></i></a>
-        <a class="btn btn-mini btn-danger" ng-click="excluir(emprestimo)"><i class="icon-trash icon-white"></i></a>
+        <a class="btn btn-mini btn-primary" ng-click="editar(emprestimo)"   rel="tooltip" title="editar"><i class="icon-edit icon-white"></i></a>
+        <a href="#visualizarItemEmprestimo" class="btn btn-mini btn-info" data-toggle="modal" rel="tooltip" title="visualizar" ng-click="visualizar(emprestimo)"><i class="icon-search icon-white"></i></a>
+        <a class="btn btn-mini btn-warning" ng-click="devolver(emprestimo)" rel="tooltip" title="devolver"><i class="icon-download-alt icon-white"></i></a>
+        <a class="btn btn-mini btn-success" ng-click="renovar(emprestimo)"  rel="tooltip" title="renovar"><i class="icon-bookmark icon-white"></i></a>
+        <a class="btn btn-mini btn-danger"  ng-click="excluir(emprestimo)"  rel="tooltip" title="excluir"><i class="icon-trash icon-white"></i></a>
       </td>
     </tr>
   </tbody>
