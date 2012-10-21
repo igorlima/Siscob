@@ -206,10 +206,10 @@ function(ng, Emprestimo, Usuario, Publicacao) {
   };
   
   ng.adicionarItemEmprestimo = function() {
-    ng.publicacao_selecionada = {};
     ng.emprestimo.itens.push({
       publicacao: ng.publicacao_selecionada
     });
+    ng.publicacao_selecionada = {};
   };
   
   ng.salvar = function() {
