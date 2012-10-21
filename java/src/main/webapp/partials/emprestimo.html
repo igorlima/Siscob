@@ -38,7 +38,7 @@
 			    <tr ng-repeat="item in emprestimo.itens">
 			      <td>{{item.publicacao.titulo}}</td>
 			      <td>
-			        <a class="btn btn-mini btn-danger" ng-click="emprestimo.itens.pop(item)"><i class="icon-trash icon-white"></i></a>
+			        <a class="btn btn-mini btn-danger" ng-click="emprestimo.itens.splice(emprestimo.itens.indexOf(item),1)"><i class="icon-trash icon-white"></i></a>
 			      </td>
 			    </tr>
 			  </tbody>

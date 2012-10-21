@@ -32,7 +32,8 @@ public class EmprestimoBO {
   
   @Transactional
   public ReturnTO editar(Emprestimo emprestimo) {
-    dao.createOrUpdate(emprestimo);
+    for (ItemEmprestimo item : emprestimo.getItens()) item.setAtivo(true).setEmprestimo(emprestimo);
+    dao.createOrUpdate(emprestimo.setAtivo(true));
     return new MessageReturnTO();
   }
   
