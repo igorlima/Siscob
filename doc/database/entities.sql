@@ -17,10 +17,10 @@ CREATE TABLE siscob.publicacao
   (
     ID              INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     TITULO          VARCHAR(256) NOT NULL,
-    EDITORA         VARCHAR(256),
-    ANO             VARCHAR(11),
+    EDITORA         VARCHAR(256) NOT NULL,
+    ANO             VARCHAR(11) NOT NULL,
     ATIVO           BOOLEAN NOT NULL,
-    TIPO            VARCHAR(20)
+    TIPO            VARCHAR(20) NOT NULL
   )
 ENGINE=InnoDB
 DEFAULT CHARSET=latin1;
@@ -29,8 +29,8 @@ DROP TABLE IF EXISTS siscob.periodico;
 CREATE TABLE siscob.periodico
   (
     ID              INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    NUMEDICAO       INT,
-    MES             VARCHAR(256)
+    NUMEDICAO       INT NOT NULL,
+    MES             VARCHAR(256) NOT NULL
   )
 ENGINE=InnoDB
 DEFAULT CHARSET=latin1;
@@ -39,9 +39,8 @@ DROP TABLE IF EXISTS siscob.livro;
 CREATE TABLE siscob.livro
   (
     ID                INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    AUTORES           VARCHAR(256),
-    QTDEXEMPLARES     INT,
-    ID_ITEMEMPRESTIMO INT
+    AUTORES           VARCHAR(256) NOT NULL,
+    QTDEXEMPLARES     INT NOT NULL
   )
 ENGINE=InnoDB
 DEFAULT CHARSET=latin1;
@@ -51,8 +50,8 @@ DROP TABLE IF EXISTS siscob.itememprestimo;
 CREATE TABLE siscob.itememprestimo
   (
     ID              INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    ID_PUBLICACAO   INT,
-    ID_EMPRESTIMO   INT,
+    ID_PUBLICACAO   INT NOT NULL,
+    ID_EMPRESTIMO   INT NOT NULL,
     ATIVO           BOOLEAN NOT NULL,
     DATADEVOLUCAO   DATE
   )
@@ -63,10 +62,10 @@ DROP TABLE IF EXISTS siscob.emprestimo;
 CREATE TABLE siscob.emprestimo
   (
     ID              INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    DATAEMPRESTIMO  DATE,
-    DATADEVOLUCAO   DATE,
+    DATAEMPRESTIMO  DATE NOT NULL,
+    DATADEVOLUCAO   DATE NOT NULL,
     ATIVO           BOOLEAN NOT NULL,
-    ID_USUARIO      INT
+    ID_USUARIO      INT NOT NULL
   )
 ENGINE=InnoDB
 DEFAULT CHARSET=latin1;

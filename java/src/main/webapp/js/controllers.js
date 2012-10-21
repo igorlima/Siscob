@@ -243,11 +243,12 @@ function(ng, Emprestimo, Usuario, Publicacao) {
   };
   
   ng.editar = function(emprestimo) {
-    ng.emprestimo.id            = emprestimo.id;
-    ng.emprestimo.itens         = emprestimo.itens;
-    ng.emprestimo.usuario.id    = emprestimo.usuario.id;
-    ng.emprestimo.dataDevolucao = emprestimo.dataDevolucao;
-    ng.publicacao_selecionada   = {};
+    ng.emprestimo.id             = emprestimo.id;
+    ng.emprestimo.itens          = emprestimo.itens;
+    ng.emprestimo.usuario.id     = emprestimo.usuario.id;
+    ng.emprestimo.dataDevolucao  = emprestimo.dataDevolucao;
+    ng.emprestimo.dataEmprestimo = emprestimo.dataEmprestimo;
+    ng.publicacao_selecionada    = {};
   };
   
   ng.visualizar = function(emprestimo) {
