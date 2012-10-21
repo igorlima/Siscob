@@ -39,7 +39,6 @@ public class Emprestimo {
 		this.dataDevolucao = dataDevolucao;
 		this.usuario = usuario;
 		dataDevolucao = dataEmprestimo;
-		
 	}
 
 	public int getId() {

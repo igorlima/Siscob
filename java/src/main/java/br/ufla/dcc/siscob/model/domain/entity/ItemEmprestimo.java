@@ -31,6 +31,11 @@ public class ItemEmprestimo {
 	@JoinColumn(name="ID_EMPRESTIMO", nullable=false)
 	private Emprestimo emprestimo;
 	
+	public ItemEmprestimo(Publicacao publicacao){
+	  this.publicacao=publicacao;
+	  this.dataDevolucao=null;
+	}
+	
 	public Long getId() {
     return id;
   }
@@ -41,11 +46,6 @@ public class ItemEmprestimo {
 
 	public void setEmprestimo(Emprestimo emprestimo) {
 		this.emprestimo = emprestimo;
-	}
-
-	public ItemEmprestimo(Publicacao publicacao){
-		this.publicacao=publicacao;
-		this.dataDevolucao=null;
 	}
 	
 	public void setDataDevolucao(Date dataDevolucao) {
@@ -59,6 +59,11 @@ public class ItemEmprestimo {
 	public Publicacao getPublicacao(){
 		return this.publicacao;
 	}
+	
+	public ItemEmprestimo setPublicacao(Publicacao publicacao) {
+    this.publicacao = publicacao;
+    return this;
+  }
 	
 	public void atualizaDevolucao(Date novaData){
 		this.dataDevolucao = novaData;
