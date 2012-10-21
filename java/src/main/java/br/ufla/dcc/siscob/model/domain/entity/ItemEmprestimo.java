@@ -48,6 +48,11 @@ public class ItemEmprestimo {
     return id;
   }
 	
+	public ItemEmprestimo setId(Long id) {
+	  this.id = id;
+	  return this;
+	}
+	
 	@JsonIgnore
 	public Emprestimo getEmprestimo() {
 		return emprestimo;

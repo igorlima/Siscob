@@ -5,7 +5,7 @@
   <div class="control-group">
     <label class="control-label" for="inputUsuario">Usuário</label>
     <div class="controls">
-      <select ng-model="emprestimo.usuario" ng-options="usuario as usuario.nome for usuario in usuarios"></select>
+      <select ng-model="emprestimo.usuario.id" ng-options="usuario.id as usuario.nome for usuario in usuarios"></select>
     </div>
   </div>
   <div class="control-group">
@@ -46,11 +46,10 @@
     </div>
   </div>
   <div class="control-group">
-    <div class="controls" ng-hide="emprestimo.id">
-      <a class="btn btn-inverse" ng-click="salvar()"> <i class="icon-plus icon-white"></i> Salvar</a>
-    </div>
-    <div class="controls" ng-show="emprestimo.id">
-      <a class="btn btn-inverse" ng-click="editar_emprestimo_selecionado()"> <i class="icon-plus icon-white"></i> Editar</a>
+    <div class="controls">
+      <a class="btn btn-inverse" ng-hide="emprestimo.id" ng-click="salvar()"> <i class="icon-plus icon-white"></i> Salvar</a>
+      <a class="btn btn-inverse" ng-show="emprestimo.id" ng-click="editar_emprestimo_selecionado()"> <i class="icon-plus icon-white"></i> Editar</a>
+      <a class="btn" ng-click="limpar()"> <i class="icon-ban-circle icon-white"></i> Limpar</a>
     </div>
   </div>
 </form>

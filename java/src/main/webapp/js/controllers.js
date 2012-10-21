@@ -165,6 +165,7 @@ function(ng, Publicacao) {
 function(ng, Emprestimo, Usuario, Publicacao) {
   
   var create_a_new_emprestimo = function() {
+    ng.publicacao_selecionada = {};
     return {
       usuario: {},
       itens: []
@@ -172,7 +173,6 @@ function(ng, Emprestimo, Usuario, Publicacao) {
   };
   
   ng.emprestimo = create_a_new_emprestimo();
-  ng.publicacao_selecionada = {};
   ng.emprestimos = [];
   ng.usuarios = [];
   ng.livros = [];
@@ -193,7 +193,12 @@ function(ng, Emprestimo, Usuario, Publicacao) {
   };
   listar_todos_emprestimos();
   
+  ng.limpar = function() {
+    ng.emprestimo = create_a_new_emprestimo();
+  };
+  
   ng.adicionarItemEmprestimo = function() {
+    ng.publicacao_selecionada = {};
     ng.emprestimo.itens.push({
       publicacao: ng.publicacao_selecionada
     });
@@ -231,8 +236,10 @@ function(ng, Emprestimo, Usuario, Publicacao) {
   
   ng.editar = function(emprestimo) {
     ng.emprestimo.id            = emprestimo.id;
-    ng.emprestimo.publicacao.id = emprestimo.publicacao.id;
+    ng.emprestimo.itens         = emprestimo.itens;
     ng.emprestimo.usuario.id    = emprestimo.usuario.id;
+    ng.emprestimo.dataDevolucao = emprestimo.dataDevolucao;
+    ng.publicacao_selecionada   = {};
   };
   
   ng.visualizar = function(emprestimo) {

@@ -26,7 +26,7 @@ public class EmprestimoController extends ApplicationController {
   
   @RequestMapping(value = "/emprestimo", method = RequestMethod.PUT)
   public ReturnTO editar(@RequestBody Emprestimo emprestimo) {
-    return bo.editar(emprestimo);
+    return bo.editar(emprestimo.setAtivo(true));
   }
   
   @RequestMapping(value = "/emprestimo/{id}", method = RequestMethod.DELETE)

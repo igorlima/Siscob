@@ -56,6 +56,11 @@ public class Emprestimo {
 		return id;
 	}
 	
+	public Emprestimo setId(Long id) {
+	  this.id = id;
+	  return this;
+	}
+	
 	@JsonSerialize( using = DateSerializer.class )
 	public Date getDataEmprestimo() {
 		return dataEmprestimo;
