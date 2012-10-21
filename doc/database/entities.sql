@@ -6,11 +6,12 @@ CREATE TABLE siscob.usuario
     ENDERECO        VARCHAR(256),
     CPF             VARCHAR(20),
     TELEFONE        VARCHAR(20),
+    ATIVO           BOOLEAN NOT NULL,
     DATAPENALIZACAO DATE
   )
 ENGINE=InnoDB
 DEFAULT CHARSET=latin1;
-  
+
 DROP TABLE IF EXISTS siscob.publicacao;
 CREATE TABLE siscob.publicacao
   (
@@ -18,6 +19,7 @@ CREATE TABLE siscob.publicacao
     TITULO          VARCHAR(256) NOT NULL,
     EDITORA         VARCHAR(256),
     ANO             VARCHAR(11),
+    ATIVO           BOOLEAN NOT NULL,
     TIPO            VARCHAR(20)
   )
 ENGINE=InnoDB
@@ -51,6 +53,7 @@ CREATE TABLE siscob.itememprestimo
     ID              INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     ID_PUBLICACAO   INT,
     ID_EMPRESTIMO   INT,
+    ATIVO           BOOLEAN NOT NULL,
     DATADEVOLUCAO   DATE
   )
 ENGINE=InnoDB
