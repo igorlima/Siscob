@@ -25,7 +25,9 @@ public class ItemEmprestimo {
 	@Id
 	@GeneratedValue
 	private Long id;
-  private Date dataDevolucao;
+  private Date dataDaDevolucao;
+  private Date dataParaDevolucao;
+  private Date dataEmprestimo;
   private Boolean ativo;
   @Transient Boolean devolver;
   @Transient Boolean renovar;
@@ -46,7 +48,7 @@ public class ItemEmprestimo {
 	
 	public ItemEmprestimo(Publicacao publicacao){
 	  this.publicacao=publicacao;
-	  this.dataDevolucao=null;
+	  this.dataDaDevolucao=null;
 	}
 	
 	public Long getId() {
@@ -69,14 +71,36 @@ public class ItemEmprestimo {
 	}
 	
 	@JsonSerialize( using = DateSerializer.class )
-	public Date getDataDevolucao(){
-	  return this.dataDevolucao;
+	public Date getDataDaDevolucao(){
+	  return this.dataDaDevolucao;
 	}
 	
 	@JsonDeserialize( using = DateDeserializer.class )
-	public ItemEmprestimo setDataDevolucao(Date dataDevolucao) {
-		this.dataDevolucao = dataDevolucao;
+	public ItemEmprestimo setDataDaDevolucao(Date dataDaDevolucao) {
+		this.dataDaDevolucao = dataDaDevolucao;
 		return this;
+	}
+	
+	@JsonSerialize( using = DateSerializer.class )
+	public Date getDataParaDevolucao(){
+	  return this.dataParaDevolucao;
+	}
+	
+	@JsonDeserialize( using = DateDeserializer.class )
+	public ItemEmprestimo setDataParaDevolucao(Date dataParaDevolucao) {
+	  this.dataParaDevolucao = dataParaDevolucao;
+	  return this;
+	}
+	
+	@JsonSerialize( using = DateSerializer.class )
+	public Date getDataEmprestimo(){
+	  return this.dataEmprestimo;
+	}
+	
+	@JsonDeserialize( using = DateDeserializer.class )
+	public ItemEmprestimo setDataEmprestimo(Date dataEmprestimo) {
+	  this.dataEmprestimo = dataEmprestimo;
+	  return this;
 	}
 	
 	public Publicacao getPublicacao(){
@@ -88,11 +112,6 @@ public class ItemEmprestimo {
     return this;
   }
 	
-	public ItemEmprestimo atualizaDevolucao(Date novaData){
-		this.dataDevolucao = novaData;
-		return this;
-	}
-
   public Boolean getAtivo() {
     return ativo;
   }

@@ -1,7 +1,6 @@
 package br.ufla.dcc.siscob.model.domain.entity;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -15,9 +14,6 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
-import org.codehaus.jackson.map.annotate.JsonSerialize;
-
-import br.ufla.dcc.util.DateSerializer;
 import br.ufla.dcc.util.SCHEMAS;
 @Entity
 @Table( name = "emprestimo", schema = SCHEMAS.SISCOB )
@@ -26,7 +22,6 @@ public class Emprestimo {
 	@Id
 	@GeneratedValue
 	private Long id;
-	private Date dataEmprestimo;
 	private Boolean ativo;
 	
 	@NotNull
@@ -42,10 +37,9 @@ public class Emprestimo {
 	  
 	}
 	
-	public Emprestimo(Long id, Date dataEmprestimo, Usuario usuario ) {
+	public Emprestimo(Long id, Usuario usuario ) {
 		this.id = id;
 		this.usuario = usuario;
-		this.dataEmprestimo = dataEmprestimo;
 	}
 
 	public Long getId() {
@@ -57,16 +51,6 @@ public class Emprestimo {
 	  return this;
 	}
 	
-	@JsonSerialize( using = DateSerializer.class )
-	public Date getDataEmprestimo() {
-		return dataEmprestimo;
-	}
-	
-	public Emprestimo setDataEmprestimo(Date dataEmprestimo) {
-	  this.dataEmprestimo = dataEmprestimo;
-	  return this;
-	}
-
 	public Usuario getUsuario() {
 		return usuario;
 	}
@@ -97,7 +81,6 @@ public class Emprestimo {
 	
 	public void devolverItemEmprestimo(ItemEmprestimo itemEmprestimo) throws Exception {
 		if (itens.contains(itemEmprestimo)) {
-			itemEmprestimo.atualizaDevolucao(new Date());
 			devolverLivro(itemEmprestimo.getPublicacao());
 			itens.remove( itemEmprestimo );
 		} else {

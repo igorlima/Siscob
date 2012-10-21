@@ -25,14 +25,16 @@ public class EmprestimoBO {
 
   @Transactional
   public ReturnTO salvar(Emprestimo emprestimo) {
-    for (ItemEmprestimo item : emprestimo.getItens()) item.setAtivo(true).setEmprestimo(emprestimo);
-    dao.createOrUpdate(emprestimo.setAtivo(true).setDataEmprestimo(new Date()));
+    for (ItemEmprestimo item : emprestimo.getItens()) item.setAtivo(true).setEmprestimo(emprestimo).setDataEmprestimo(new Date());
+    dao.createOrUpdate(emprestimo.setAtivo(true));
     return new MessageReturnTO();
   }
   
   @Transactional
   public ReturnTO editar(Emprestimo emprestimo) {
-    for (ItemEmprestimo item : emprestimo.getItens()) item.setAtivo(true).setEmprestimo(emprestimo);
+    for (ItemEmprestimo item : emprestimo.getItens())
+      if (item.getEmprestimo()!=null) item.setAtivo(true).setEmprestimo(emprestimo);
+      else item.setAtivo(true).setEmprestimo(emprestimo).setDataEmprestimo(new Date());
     dao.createOrUpdate(emprestimo.setAtivo(true));
     return new MessageReturnTO();
   }

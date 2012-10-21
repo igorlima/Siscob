@@ -174,7 +174,7 @@ function(ng, Emprestimo, Usuario, Publicacao) {
   
   var create_a_new_emprestimo = function() {
     ng.publicacao_selecionada = {};
-    ng.dataDevolucao = null;
+    ng.dataParaDevolucao = null;
     return {
       usuario: {},
       itens: []
@@ -208,11 +208,11 @@ function(ng, Emprestimo, Usuario, Publicacao) {
   
   ng.adicionarItemEmprestimo = function() {
     ng.emprestimo.itens.push({
-      dataDevolucao: ng.dataDevolucao,
+      dataParaDevolucao: ng.dataParaDevolucao,
       publicacao: ng.publicacao_selecionada
     });
     ng.publicacao_selecionada = {};
-    ng.dataDevolucao = null;
+    ng.dataParaDevolucao = null;
   };
   
   ng.salvar = function() {
