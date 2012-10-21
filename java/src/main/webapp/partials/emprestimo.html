@@ -1,0 +1,82 @@
+
+<legend>Empréstimo</legend>
+  
+<form class="form-horizontal">
+  <div class="control-group">
+    <label class="control-label" for="inputUsuario">Usuário</label>
+    <div class="controls">
+      <select ng-model="itemEmprestimo.emprestimo.usuario.id" ng-options="usuario.id as usuario.nome for usuario in usuarios"></select>
+    </div>
+  </div>
+  <div class="control-group">
+    <label class="control-label" for="inputLivro">Livro</label>
+    <div class="controls">
+      <select ng-model="itemEmprestimo.publicacao.id" ng-options="livro.id as livro.titulo for livro in livros"></select>
+    </div>
+  </div>
+  <div class="control-group">
+    <label class="control-label" for="inputDataDevolucao">Data da devolução</label>
+    <div class="controls">
+      <input type="text" placeholder="Data Devolução" ng-model="itemEmprestimo.dataDevolucao">
+    </div>
+  </div>
+  <div class="control-group">
+    <div class="controls" ng-hide="itemEmprestimo.id">
+      <a class="btn btn-inverse" ng-click="salvar()"> <i class="icon-plus icon-white"></i> Salvar</a>
+    </div>
+    <div class="controls" ng-show="itemEmprestimo.id">
+      <a class="btn btn-inverse" ng-click="editar_publicacao_selecionado()"> <i class="icon-plus icon-white"></i> Editar</a>
+    </div>
+  </div>
+</form>
+
+<legend>Lista dos Empréstimos</legend>
+<div class="alert" ng-hide="has_publicacoes">
+  <strong>Atenção!</strong> Não foi encontrada nenhum item de empréstimo salvo.
+</div>
+
+<table class="table table-hover" ng-show="has_emprestimos">
+  <thead>
+    <tr>
+      <th>#</th>
+      <th>Usuário</th>
+      <th>Livro</th>
+      <th>Data da devolução</th>
+      <th>Ações</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr ng-repeat="itemEmprestimo in itemEmprestimos">
+      <td>{{itemEmprestimo.id}}</td>
+      <td>{{itemEmprestimo.usuario.nome}}</td>
+      <td>{{itemEmprestimo.publicacao.titulo}}</td>
+      <td>{{itemEmprestimo.dataDevolucao}}</td>
+      <td>
+        <a class="btn btn-mini btn-primary" ng-click="editar(itemEmprestimo)"><i class="icon-edit icon-white"></i></a>
+        <a href="#visualizarItemEmprestimo" class="btn btn-mini btn-info" data-toggle="modal" ng-click="visualizar(itemEmprestimo)"><i class="icon-search icon-white"></i></a>
+        <a class="btn btn-mini btn-danger" ng-click="devolver(itemEmprestimo)"><i class=" icon-download-alt icon-white"></i></a>
+        <a class="btn btn-mini btn-danger" ng-click="excluir(itemEmprestimo)"><i class="icon-trash icon-white"></i></a>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<div id="visualizarItemEmprestimo" class="modal hide fade">
+  <div class="modal-header">
+    <a class="close" data-dismiss="modal" aria-hidden="true">&times;</a>
+    <h3>Visualização do item de empréstimo</h3>
+  </div>
+  <div class="modal-body">
+    <address>
+      <strong>{{itemEmprestimo_para_visualizacao.publicacao.titulo}}</strong><br>
+      <abbr title="Editora">Editora:</abbr> {{itemEmprestimo_para_visualizacao.publicacao.editora}} <br>
+      <abbr title="Ano">Ano:</abbr> {{itemEmprestimo_para_visualizacao.publicacao.ano}} <br>
+      <abbr title="Autores">Autores:</abbr> {{itemEmprestimo_para_visualizacao.publicacao.autores}} <br>
+      <strong>Usuário: </strong> {{itemEmprestimo_para_visualizacao.usuario.nome}}<br>
+      <abbr title="Telefone">Telefone:</abbr> {{itemEmprestimo_para_visualizacao.usuario.telefone}} <br>
+    </address>
+  </div>
+  <div class="modal-footer">
+    <a class="btn" data-dismiss="modal">Close</a>
+  </div>
+</div>
