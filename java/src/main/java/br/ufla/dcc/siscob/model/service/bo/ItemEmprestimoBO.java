@@ -36,14 +36,14 @@ public class ItemEmprestimoBO {
     
     for (ItemEmprestimo item : itens) {
       if (item.getRenovar()) {
-        dao.retrieve(item.getId()).setDataDaDevolucao(new Date());
+        ItemEmprestimo fromDB = dao.retrieve(item.getId()).setDataDaDevolucao(new Date());
         dao.createOrUpdate(
           new ItemEmprestimo()
           .setAtivo(true)
           .setDataEmprestimo(new Date())
           .setDataParaDevolucao(item.getDataParaDevolucao())
-          .setEmprestimo(item.getEmprestimo())
-          .setPublicacao(item.getPublicacao())
+          .setEmprestimo(fromDB.getEmprestimo())
+          .setPublicacao(fromDB.getPublicacao())
         );
       }
     }
