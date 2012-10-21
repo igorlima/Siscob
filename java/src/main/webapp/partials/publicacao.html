@@ -59,11 +59,10 @@
   </div>
   
   <div class="control-group">
-    <div class="controls" ng-hide="publicacao.id">
-      <a class="btn btn-inverse" ng-click="salvar()"> <i class="icon-plus icon-white"></i> Salvar</a>
-    </div>
-    <div class="controls" ng-show="publicacao.id">
-      <a class="btn btn-inverse" ng-click="editar_publicacao_selecionado()"> <i class="icon-plus icon-white"></i> Editar</a>
+    <div class="controls">
+      <a class="btn btn-inverse" ng-hide="publicacao.id" ng-click="salvar()"> <i class="icon-plus icon-white"></i> Salvar</a>
+      <a class="btn btn-inverse" ng-show="publicacao.id" ng-click="editar_publicacao_selecionado()"> <i class="icon-plus icon-white"></i> Editar</a>
+      <a class="btn" ng-click="limpar()"> <i class="icon-ban-circle"></i> Limpar</a>
     </div>
   </div>
 </form>

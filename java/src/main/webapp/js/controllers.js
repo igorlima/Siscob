@@ -19,6 +19,10 @@ function(ng, Usuario) {
   };
   listar_todos_usuarios();
   
+  ng.limpar = function() {
+    ng.usuario = {};
+  };
+  
   ng.salvar = function() {
     Usuario.save( {}, ng.usuario, 
       function(data){
@@ -94,6 +98,10 @@ function(ng, Publicacao) {
     });
   };
   listar_todas_publicacoes();
+  
+  ng.limpar = function() {
+    ng.publicacao = {tipo:'LIVRO'};
+  };
   
   ng.salvar = function() {
     Publicacao.save( {tipo:ng.publicacao.tipo}, ng.publicacao, 

@@ -28,11 +28,10 @@
   </div>
   
   <div class="control-group">
-    <div class="controls" ng-hide="usuario.id">
-      <a class="btn btn-inverse" ng-click="salvar()"> <i class="icon-plus icon-white"></i> Salvar</a>
-    </div>
-    <div class="controls" ng-show="usuario.id">
-      <a class="btn btn-inverse" ng-click="editar_usuario_selecionado()"> <i class="icon-plus icon-white"></i> Editar</a>
+    <div class="controls">
+      <a class="btn btn-inverse" ng-hide="usuario.id" ng-click="salvar()"> <i class="icon-plus icon-white"></i> Salvar</a>
+      <a class="btn btn-inverse" ng-show="usuario.id" ng-click="editar_usuario_selecionado()"> <i class="icon-plus icon-white"></i> Editar</a>
+      <a class="btn" ng-click="limpar()"> <i class="icon-ban-circle"></i> Limpar</a>
     </div>
   </div>
 </form>
