@@ -31,6 +31,7 @@ public class Emprestimo {
 	
 	@OneToMany( cascade=CascadeType.ALL, fetch = FetchType.EAGER )
   @JoinColumn( name = "ID_EMPRESTIMO", referencedColumnName = "ID" )
+	
 	private List<ItemEmprestimo> itens = new ArrayList<ItemEmprestimo>();
 	
 	public Emprestimo(){
