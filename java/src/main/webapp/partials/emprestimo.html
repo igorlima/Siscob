@@ -5,33 +5,33 @@
   <div class="control-group">
     <label class="control-label" for="inputUsuario">Usuário</label>
     <div class="controls">
-      <select ng-model="itemEmprestimo.emprestimo.usuario.id" ng-options="usuario.id as usuario.nome for usuario in usuarios"></select>
+      <select ng-model="item_emprestimo.emprestimo.usuario.id" ng-options="usuario.id as usuario.nome for usuario in usuarios"></select>
     </div>
   </div>
   <div class="control-group">
     <label class="control-label" for="inputLivro">Livro</label>
     <div class="controls">
-      <select ng-model="itemEmprestimo.publicacao.id" ng-options="livro.id as livro.titulo for livro in livros"></select>
+      <select ng-model="item_emprestimo.publicacao.id" ng-options="livro.id as livro.titulo for livro in livros"></select>
     </div>
   </div>
   <div class="control-group">
     <label class="control-label" for="inputDataDevolucao">Data da devolução</label>
     <div class="controls">
-      <input type="text" placeholder="Data Devolução" ng-model="itemEmprestimo.dataDevolucao">
+      <input type="text" placeholder="Data Devolução" ng-model="item_emprestimo.dataDevolucao">
     </div>
   </div>
   <div class="control-group">
-    <div class="controls" ng-hide="itemEmprestimo.id">
+    <div class="controls" ng-hide="item_emprestimo.id">
       <a class="btn btn-inverse" ng-click="salvar()"> <i class="icon-plus icon-white"></i> Salvar</a>
     </div>
-    <div class="controls" ng-show="itemEmprestimo.id">
-      <a class="btn btn-inverse" ng-click="editar_publicacao_selecionado()"> <i class="icon-plus icon-white"></i> Editar</a>
+    <div class="controls" ng-show="item_emprestimo.id">
+      <a class="btn btn-inverse" ng-click="editar_item_emprestimo_selecionado()"> <i class="icon-plus icon-white"></i> Editar</a>
     </div>
   </div>
 </form>
 
 <legend>Lista dos Empréstimos</legend>
-<div class="alert" ng-hide="has_publicacoes">
+<div class="alert" ng-hide="has_item_emprestimos">
   <strong>Atenção!</strong> Não foi encontrada nenhum item de empréstimo salvo.
 </div>
 
@@ -46,16 +46,16 @@
     </tr>
   </thead>
   <tbody>
-    <tr ng-repeat="itemEmprestimo in itemEmprestimos">
-      <td>{{itemEmprestimo.id}}</td>
-      <td>{{itemEmprestimo.usuario.nome}}</td>
-      <td>{{itemEmprestimo.publicacao.titulo}}</td>
-      <td>{{itemEmprestimo.dataDevolucao}}</td>
+    <tr ng-repeat="item_emprestimo in item_emprestimos">
+      <td>{{item_emprestimo.id}}</td>
+      <td>{{item_emprestimo.usuario.nome}}</td>
+      <td>{{item_emprestimo.publicacao.titulo}}</td>
+      <td>{{item_emprestimo.dataDevolucao}}</td>
       <td>
-        <a class="btn btn-mini btn-primary" ng-click="editar(itemEmprestimo)"><i class="icon-edit icon-white"></i></a>
-        <a href="#visualizarItemEmprestimo" class="btn btn-mini btn-info" data-toggle="modal" ng-click="visualizar(itemEmprestimo)"><i class="icon-search icon-white"></i></a>
-        <a class="btn btn-mini btn-danger" ng-click="devolver(itemEmprestimo)"><i class=" icon-download-alt icon-white"></i></a>
-        <a class="btn btn-mini btn-danger" ng-click="excluir(itemEmprestimo)"><i class="icon-trash icon-white"></i></a>
+        <a class="btn btn-mini btn-primary" ng-click="editar(item_emprestimo)"><i class="icon-edit icon-white"></i></a>
+        <a href="#visualizarItemEmprestimo" class="btn btn-mini btn-info" data-toggle="modal" ng-click="visualizar(item_emprestimo)"><i class="icon-search icon-white"></i></a>
+        <a class="btn btn-mini btn-danger" ng-click="devolver(item_emprestimo)"><i class=" icon-download-alt icon-white"></i></a>
+        <a class="btn btn-mini btn-danger" ng-click="excluir(item_emprestimo)"><i class="icon-trash icon-white"></i></a>
       </td>
     </tr>
   </tbody>
@@ -68,12 +68,12 @@
   </div>
   <div class="modal-body">
     <address>
-      <strong>{{itemEmprestimo_para_visualizacao.publicacao.titulo}}</strong><br>
-      <abbr title="Editora">Editora:</abbr> {{itemEmprestimo_para_visualizacao.publicacao.editora}} <br>
-      <abbr title="Ano">Ano:</abbr> {{itemEmprestimo_para_visualizacao.publicacao.ano}} <br>
-      <abbr title="Autores">Autores:</abbr> {{itemEmprestimo_para_visualizacao.publicacao.autores}} <br>
-      <strong>Usuário: </strong> {{itemEmprestimo_para_visualizacao.usuario.nome}}<br>
-      <abbr title="Telefone">Telefone:</abbr> {{itemEmprestimo_para_visualizacao.usuario.telefone}} <br>
+      <strong>{{item_emprestimo_para_visualizacao.publicacao.titulo}}</strong><br>
+      <abbr title="Editora">Editora:</abbr> {{item_emprestimo_para_visualizacao.publicacao.editora}} <br>
+      <abbr title="Ano">Ano:</abbr> {{item_emprestimo_para_visualizacao.publicacao.ano}} <br>
+      <abbr title="Autores">Autores:</abbr> {{item_emprestimo_para_visualizacao.publicacao.autores}} <br>
+      <strong>Usuário: </strong> {{item_emprestimo_para_visualizacao.usuario.nome}}<br>
+      <abbr title="Telefone">Telefone:</abbr> {{item_emprestimo_para_visualizacao.usuario.telefone}} <br>
     </address>
   </div>
   <div class="modal-footer">

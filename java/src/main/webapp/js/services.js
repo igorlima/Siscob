@@ -23,3 +23,15 @@ factory('Publicacao', ['$resource', function($resource){
     remove: {method:'DELETE', params:{id:'@id'}}
   });
 }]);
+
+angular.module('itemEmprestimoModel', ['ngResource']).
+factory('ItemEmprestimo', ['$resource', function($resource){
+  return $resource('itememprestimo/:id', {}, {
+    all:     {method:'GET'   , params:{}},
+    save:    {method:'POST'  , params:{}},
+    update:  {method:'PUT'   , params:{}},
+    get:     {method:'GET'   , params:{id:'@id'}},
+    devolve: {method:'PUT'   , params:{id:'@id'}},
+    remove:  {method:'DELETE', params:{id:'@id'}}
+  });
+}]);

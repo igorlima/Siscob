@@ -159,4 +159,96 @@ function(ng, Publicacao) {
     });
   };
 
+}])
+
+
+.controller( 'ItemEmprestimoCtrl', ['$scope','ItemEmprestimo','Usuario','Publicacao', 
+function(ng, ItemEmprestimo, Usuario, Publicacao) {
+  
+  var create_a_new_item_emprestimo = function() {
+    return {
+      usuario: {},
+      publicacao: {}
+    };
+  };
+  
+  ng.item_emprestimo = create_a_new_item_emprestimo();
+  
+  ng.item_emprestimos = [];
+  ng.usuarios = [];
+  ng.livros = [];
+  
+  Publicacao.all( {tipo:'livros'}, function(data){
+    ng.livros = data.returnObject;
+  });
+  
+  Usuario.all(function(data){
+    ng.usuarios = data.returnObject;
+  });
+  
+  var listar_todos_item_emprestimos = function() {
+    ItemEmprestimo.all(function(data){
+      ng.item_emprestimos = data.returnObject;
+      ng.has_item_emprestimos = ng.item_emprestimos.length > 0 ? true : false;
+    });
+  };
+  listar_todos_item_emprestimos();
+  
+  ng.salvar = function() {
+    ItemEmprestimo.save( {tipo:ng.item_emprestimo.tipo}, ng.item_emprestimo, 
+      function(data){
+        if (data.status=='ERROR') Message.set(true, data.message);
+        else{
+          Message.set(false, data.message);
+          ng.item_emprestimo = create_a_new_item_emprestimo();
+          listar_todos_item_emprestimos();
+        }
+      },
+      function(data){
+        Message.set(true, data);
+    });
+  };
+  
+  ng.editar_item_emprestimo_selecionado = function() {
+    ItemEmprestimo.update( {tipo:ng.item_emprestimo.tipo}, ng.item_emprestimo, 
+      function(data){
+        if (data.status=='ERROR') Message.set(true, data.message);
+        else{
+          Message.set(false, data.message);
+          ng.item_emprestimo = create_a_new_item_emprestimo();
+          listar_todos_item_emprestimos();
+        }
+      },
+      function(data){
+        Message.set(true, data);
+    });
+  };
+  
+  ng.editar = function(item_emprestimo) {
+    ng.item_emprestimo.id            = item_emprestimo.id;
+    ng.item_emprestimo.publicacao.id = item_emprestimo.publicacao.id;
+    ng.item_emprestimo.usuario.id    = item_emprestimo.usuario.id;
+  };
+  
+  ng.visualizar = function(item_emprestimo) {
+    ng.item_emprestimo_para_visualizacao = item_emprestimo;
+    ng.item_emprestimo = create_a_new_item_emprestimo();
+  };
+  
+  ng.excluir = function(item_emprestimo) {
+    ItemEmprestimo.remove( {id:item_emprestimo.id},
+      function(data) {
+        if (data.status=='ERROR') Message.set(true, data.message);
+        else{
+          Message.set(false, data.message);
+          ng.item_emprestimo = create_a_new_item_emprestimo();
+          listar_todos_item_emprestimos();
+        }
+      },
+      function(data) {
+        Message.set(true, data);
+        ng.item_emprestimo = create_a_new_item_emprestimo();
+    });
+  };
+
 }]);
