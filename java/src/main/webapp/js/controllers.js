@@ -174,6 +174,7 @@ function(ng, Emprestimo, Usuario, Publicacao) {
   
   var create_a_new_emprestimo = function() {
     ng.publicacao_selecionada = {};
+    ng.dataDevolucao = null;
     return {
       usuario: {},
       itens: []
@@ -207,9 +208,11 @@ function(ng, Emprestimo, Usuario, Publicacao) {
   
   ng.adicionarItemEmprestimo = function() {
     ng.emprestimo.itens.push({
+      dataDevolucao: ng.dataDevolucao,
       publicacao: ng.publicacao_selecionada
     });
     ng.publicacao_selecionada = {};
+    ng.dataDevolucao = null;
   };
   
   ng.salvar = function() {
@@ -246,13 +249,12 @@ function(ng, Emprestimo, Usuario, Publicacao) {
     ng.emprestimo.id             = emprestimo.id;
     ng.emprestimo.itens          = emprestimo.itens;
     ng.emprestimo.usuario.id     = emprestimo.usuario.id;
-    ng.emprestimo.dataDevolucao  = emprestimo.dataDevolucao;
     ng.emprestimo.dataEmprestimo = emprestimo.dataEmprestimo;
     ng.publicacao_selecionada    = {};
   };
   
-  ng.visualizar = function(emprestimo) {
-    ng.emprestimo_para_visualizacao = emprestimo;
+  ng.selecionar = function(emprestimo) {
+    ng.emprestimo_selecionado = emprestimo;
     ng.emprestimo = create_a_new_emprestimo();
   };
   

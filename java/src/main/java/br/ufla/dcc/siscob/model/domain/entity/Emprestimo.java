@@ -15,10 +15,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
-import org.codehaus.jackson.map.annotate.JsonDeserialize;
 import org.codehaus.jackson.map.annotate.JsonSerialize;
 
-import br.ufla.dcc.util.DateDeserializer;
 import br.ufla.dcc.util.DateSerializer;
 import br.ufla.dcc.util.SCHEMAS;
 @Entity
@@ -29,7 +27,6 @@ public class Emprestimo {
 	@GeneratedValue
 	private Long id;
 	private Date dataEmprestimo;
-	private Date dataDevolucao;
 	private Boolean ativo;
 	
 	@NotNull
@@ -45,9 +42,8 @@ public class Emprestimo {
 	  
 	}
 	
-	public Emprestimo(Long id, Date dataEmprestimo, Date dataDevolucao, Usuario usuario ) {
+	public Emprestimo(Long id, Date dataEmprestimo, Usuario usuario ) {
 		this.id = id;
-		this.dataDevolucao = dataDevolucao;
 		this.usuario = usuario;
 		this.dataEmprestimo = dataEmprestimo;
 	}
@@ -68,17 +64,6 @@ public class Emprestimo {
 	
 	public Emprestimo setDataEmprestimo(Date dataEmprestimo) {
 	  this.dataEmprestimo = dataEmprestimo;
-	  return this;
-	}
-
-	@JsonSerialize( using = DateSerializer.class )
-	public Date getDataDevolucao() {
-		return dataDevolucao;
-	}
-	
-	@JsonDeserialize( using = DateDeserializer.class )
-	public Emprestimo setDataDevolucao(Date dataDevolucao) {
-	  this.dataDevolucao = dataDevolucao;
 	  return this;
 	}
 

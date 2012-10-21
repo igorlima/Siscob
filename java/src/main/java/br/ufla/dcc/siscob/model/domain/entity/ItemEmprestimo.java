@@ -8,6 +8,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.jackson.map.annotate.JsonDeserialize;
@@ -26,6 +27,10 @@ public class ItemEmprestimo {
 	private Long id;
   private Date dataDevolucao;
   private Boolean ativo;
+  @Transient Boolean devolver;
+  @Transient Boolean renovar;
+  @Transient Boolean devolvido;
+  
   
 	@ManyToOne
 	@JoinColumn(name="ID_PUBLICACAO", referencedColumnName = "ID", nullable=false)
@@ -97,4 +102,31 @@ public class ItemEmprestimo {
     return this;
   }
 
+  public Boolean getDevolver() {
+    return devolver;
+  }
+
+  public ItemEmprestimo setDevolver(Boolean devolver) {
+    this.devolver = devolver;
+    return this;
+  }
+  
+  public Boolean getDevolvido() {
+    return devolvido;
+  }
+
+  public ItemEmprestimo setDevolvido(Boolean devolvido) {
+    this.devolvido = devolvido;
+    return this;
+  }
+
+  public Boolean getRenovar() {
+    return renovar;
+  }
+
+  public ItemEmprestimo setRenovar(Boolean renovar) {
+    this.renovar = renovar;
+    return this;
+  }
+  
 }

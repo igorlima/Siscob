@@ -11,7 +11,7 @@
   <div class="control-group">
     <label class="control-label" for="inputDataDevolucao">Data da devolução</label>
     <div class="controls">
-      <input type="text" placeholder="Data Devolução" ng-model="emprestimo.dataDevolucao">
+      <input type="text" placeholder="Data Devolução" ng-model="dataDevolucao">
     </div>
   </div>
   <div class="control-group">
@@ -31,12 +31,14 @@
 		    <thead>
 			    <tr>
 			      <th>Título</th>
+			      <th>Data da devolução</th>
 			      <th>Ações</th>
 			    </tr>
 			  </thead>
 			  <tbody>
 			    <tr ng-repeat="item in emprestimo.itens">
 			      <td>{{item.publicacao.titulo}}</td>
+			      <td>{{item.dataDevolucao}}</td>
 			      <td>
 			        <a class="btn btn-mini btn-danger" ng-click="emprestimo.itens.splice(emprestimo.itens.indexOf(item),1)"><i class="icon-trash icon-white"></i></a>
 			      </td>
@@ -64,7 +66,7 @@
     <tr>
       <th>#</th>
       <th>Usuário</th>
-      <th>Data da devolução</th>
+      <th>Data do emrpéstimo</th>
       <th>Ações</th>
     </tr>
   </thead>
@@ -72,43 +74,97 @@
     <tr ng-repeat="emprestimo in emprestimos">
       <td>{{emprestimo.id}}</td>
       <td>{{emprestimo.usuario.nome}}</td>
-      <td>{{emprestimo.dataDevolucao}}</td>
+      <td>{{emprestimo.dataEmprestimo}}</td>
       <td>
         <a class="btn btn-mini btn-primary" ng-click="editar(emprestimo)"   rel="tooltip" title="editar"><i class="icon-edit icon-white"></i></a>
-        <a href="#visualizarItemEmprestimo" class="btn btn-mini btn-info" data-toggle="modal" rel="tooltip" title="visualizar" ng-click="visualizar(emprestimo)"><i class="icon-search icon-white"></i></a>
-        <a class="btn btn-mini btn-warning" ng-click="devolver(emprestimo)" rel="tooltip" title="devolver"><i class="icon-download-alt icon-white"></i></a>
-        <a class="btn btn-mini btn-success" ng-click="renovar(emprestimo)"  rel="tooltip" title="renovar"><i class="icon-bookmark icon-white"></i></a>
+        <a href="#visualizarEmprestimo" class="btn btn-mini btn-info"  data-toggle="modal" rel="tooltip" title="visualizar" ng-click="selecionar(emprestimo)"><i class="icon-search icon-white"></i></a>
+        <a href="#devolverEmprestimo" class="btn btn-mini btn-warning" data-toggle="modal" rel="tooltip" title="devolver"   ng-click="selecionar(emprestimo)"><i class="icon-download-alt icon-white"></i></a>
+        <a href="#renovarEmprestimo" class="btn btn-mini btn-success"  data-toggle="modal" rel="tooltip" title="renovar"    ng-click="selecionar(emprestimo)"><i class="icon-bookmark icon-white"></i></a>
         <a class="btn btn-mini btn-danger"  ng-click="excluir(emprestimo)"  rel="tooltip" title="excluir"><i class="icon-trash icon-white"></i></a>
       </td>
     </tr>
   </tbody>
 </table>
 
-<div id="visualizarItemEmprestimo" class="modal hide fade">
+<div id="visualizarEmprestimo" class="modal hide fade">
   <div class="modal-header">
     <a class="close" data-dismiss="modal" aria-hidden="true">&times;</a>
-    <h3>Visualização do item de empréstimo</h3>
+    <h3>Visualização</h3>
   </div>
   <div class="modal-body">
     <address>
-      <strong>Devolução em {{emprestimo_para_visualizacao.dataDevolucao}}</strong><br>
-      <strong>Usuário: </strong> {{emprestimo_para_visualizacao.usuario.nome}}<br>
-      <abbr title="Telefone">Telefone:</abbr> {{emprestimo_para_visualizacao.usuario.telefone}} <br>
+      <strong>Emprestado em {{emprestimo_selecionado.dataEmprestimo}}</strong><br>
+      <strong>Usuário: </strong> {{emprestimo_selecionado.usuario.nome}}<br>
+      <abbr title="Telefone">Telefone:</abbr> {{emprestimo_selecionado.usuario.telefone}} <br>
     </address>
-    <table class="table table-hover" ng-show="emprestimo_para_visualizacao.itens.length>0">
+    <table class="table table-hover" ng-show="emprestimo_selecionado.itens.length>0">
+      <thead>
+        <tr>
+          <th>Título</th>
+          <th>Data da Devolução</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="item in emprestimo_selecionado.itens">
+          <td>{{item.publicacao.titulo}}</td>
+          <td>{{item.dataDevolucao}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="modal-footer">
+    <a class="btn" data-dismiss="modal">Close</a>
+  </div>
+</div>
+
+<div id="devolverEmprestimo" class="modal hide fade">
+  <div class="modal-header">
+    <a class="close" data-dismiss="modal" aria-hidden="true">&times;</a>
+    <h3>Devolução</h3>
+  </div>
+  <div class="modal-body">
+    <table class="table table-hover" ng-show="emprestimo_selecionado.itens.length>0">
       <thead>
         <tr>
           <th>Título</th>
         </tr>
       </thead>
       <tbody>
-        <tr ng-repeat="item in emprestimo_para_visualizacao.itens">
-          <td>{{item.publicacao.titulo}}</td>
+        <tr ng-repeat="item in emprestimo_selecionado.itens">
+          <td><input type="checkbox" ng-model="item.devolver"> {{item.publicacao.titulo}}</td>
         </tr>
       </tbody>
     </table>
   </div>
   <div class="modal-footer">
+    <a class="btn btn-inverse" ng-click="devolver_emprestimo_selecionado()"> <i class="icon-ok icon-white"></i> Devolver</a>
+    <a class="btn" data-dismiss="modal">Close</a>
+  </div>
+</div>
+
+<div id="renovarEmprestimo" class="modal hide fade">
+  <div class="modal-header">
+    <a class="close" data-dismiss="modal" aria-hidden="true">&times;</a>
+    <h3>Renovação</h3>
+  </div>
+  <div class="modal-body">
+    <table class="table table-hover" ng-show="emprestimo_selecionado.itens.length>0">
+      <thead>
+        <tr>
+          <th>Título</th>
+          <th>Data devolução</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="item in emprestimo_selecionado.itens">
+          <td><input type="checkbox" ng-model="item.renovar"> {{item.publicacao.titulo}}</td>
+          <td><input type="text" placeholder="Data Devolução" ng-show="item.renovar" ng-model="item.dataDevolucao"></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="modal-footer">
+    <a class="btn btn-inverse" ng-click="renovar_emprestimo_selecionado()"> <i class="icon-ok icon-white"></i> Renovar</a>
     <a class="btn" data-dismiss="modal">Close</a>
   </div>
 </div>

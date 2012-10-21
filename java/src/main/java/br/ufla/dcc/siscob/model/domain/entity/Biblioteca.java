@@ -1,7 +1,6 @@
 package br.ufla.dcc.siscob.model.domain.entity;
 
 import java.util.ArrayList;
-import java.util.GregorianCalendar;
 import java.util.List;
 
 import br.ufla.lemaf.commons.model.service.to.MessageReturnTO;
@@ -139,16 +138,16 @@ public class Biblioteca {
   
   public void devolveItemEmprestimo(Emprestimo emprestimo, ItemEmprestimo itemEmprestimo) throws Exception{
   	if( emprestimos.contains(emprestimo)){
-  		long hoje = GregorianCalendar.getInstance().getTimeInMillis();
-  		long diferencaEmDias =( ( ( ( ( hoje - emprestimo.getDataDevolucao().getTime() )/1000 ) /60 ) /60 ) /24 );
-  		emprestimo.devolverItemEmprestimo(itemEmprestimo);
-  		
-  		if (diferencaEmDias >= 1){
-  			Usuario usuario = emprestimo.getUsuario();
-  			GregorianCalendar dataPenalizacao = new GregorianCalendar();
-  			dataPenalizacao.add(GregorianCalendar.DAY_OF_MONTH, (int) diferencaEmDias);
-  			usuario.setDataPenalizacao(dataPenalizacao.getTime());
-  		}
+//  		long hoje = GregorianCalendar.getInstance().getTimeInMillis();
+//  		long diferencaEmDias =( ( ( ( ( hoje - emprestimo.getDataDevolucao().getTime() )/1000 ) /60 ) /60 ) /24 );
+//  		emprestimo.devolverItemEmprestimo(itemEmprestimo);
+//  		
+//  		if (diferencaEmDias >= 1){
+//  			Usuario usuario = emprestimo.getUsuario();
+//  			GregorianCalendar dataPenalizacao = new GregorianCalendar();
+//  			dataPenalizacao.add(GregorianCalendar.DAY_OF_MONTH, (int) diferencaEmDias);
+//  			usuario.setDataPenalizacao(dataPenalizacao.getTime());
+//  		}
   			
   	}
   	else
