@@ -92,13 +92,22 @@
   </div>
   <div class="modal-body">
     <address>
-      <strong>{{emprestimo_para_visualizacao.publicacao.titulo}}</strong><br>
-      <abbr title="Editora">Editora:</abbr> {{emprestimo_para_visualizacao.publicacao.editora}} <br>
-      <abbr title="Ano">Ano:</abbr> {{emprestimo_para_visualizacao.publicacao.ano}} <br>
-      <abbr title="Autores">Autores:</abbr> {{emprestimo_para_visualizacao.publicacao.autores}} <br>
+      <strong>Devolução em {{emprestimo_para_visualizacao.dataDevolucao}}</strong><br>
       <strong>Usuário: </strong> {{emprestimo_para_visualizacao.usuario.nome}}<br>
       <abbr title="Telefone">Telefone:</abbr> {{emprestimo_para_visualizacao.usuario.telefone}} <br>
     </address>
+    <table class="table table-hover" ng-show="emprestimo_para_visualizacao.itens.length>0">
+      <thead>
+        <tr>
+          <th>Título</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="item in emprestimo_para_visualizacao.itens">
+          <td>{{item.publicacao.titulo}}</td>
+        </tr>
+      </tbody>
+    </table>
   </div>
   <div class="modal-footer">
     <a class="btn" data-dismiss="modal">Close</a>

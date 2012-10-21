@@ -9,6 +9,7 @@ import javax.inject.Named;
 import org.springframework.transaction.annotation.Transactional;
 
 import br.ufla.dcc.siscob.model.domain.entity.Emprestimo;
+import br.ufla.dcc.siscob.model.domain.entity.ItemEmprestimo;
 import br.ufla.dcc.siscob.model.persistence.dao.EmprestimoDAO;
 import br.ufla.lemaf.commons.model.persistence.dao.annotation.DAO;
 import br.ufla.lemaf.commons.model.persistence.dao.annotation.DAOImplementation;
@@ -24,6 +25,7 @@ public class EmprestimoBO {
 
   @Transactional
   public ReturnTO salvar(Emprestimo emprestimo) {
+    for (ItemEmprestimo item : emprestimo.getItens()) item.setAtivo(true).setEmprestimo(emprestimo);
     dao.createOrUpdate(emprestimo.setAtivo(true).setDataEmprestimo(new Date()));
     return new MessageReturnTO();
   }

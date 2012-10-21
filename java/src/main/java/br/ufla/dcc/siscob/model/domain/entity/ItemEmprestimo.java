@@ -2,7 +2,6 @@ package br.ufla.dcc.siscob.model.domain.entity;
 
 import java.util.Date;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -10,6 +9,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.jackson.map.annotate.JsonDeserialize;
 import org.codehaus.jackson.map.annotate.JsonSerialize;
 
@@ -27,12 +27,13 @@ public class ItemEmprestimo {
   private Date dataDevolucao;
   private Boolean ativo;
   
-	@ManyToOne( cascade = {CascadeType.PERSIST, CascadeType.MERGE}, targetEntity=Publicacao.class )
-	@JoinColumn(name="ID_PUBLICACAO", nullable=false)
+	@ManyToOne
+	@JoinColumn(name="ID_PUBLICACAO", referencedColumnName = "ID", nullable=false)
 	private Publicacao publicacao;
 	
-	@ManyToOne(targetEntity = Emprestimo.class)
-	@JoinColumn(name="ID_EMPRESTIMO", nullable=false)
+	@ManyToOne
+  @JoinColumn(name = "ID_EMPRESTIMO", referencedColumnName = "ID", nullable=false)
+	@JsonIgnore
 	private Emprestimo emprestimo;
 	
 	public ItemEmprestimo(){
@@ -47,12 +48,14 @@ public class ItemEmprestimo {
     return id;
   }
 	
+	@JsonIgnore
 	public Emprestimo getEmprestimo() {
 		return emprestimo;
 	}
 
-	public void setEmprestimo(Emprestimo emprestimo) {
+	public ItemEmprestimo setEmprestimo(Emprestimo emprestimo) {
 		this.emprestimo = emprestimo;
+		return this;
 	}
 	
 	@JsonSerialize( using = DateSerializer.class )
@@ -61,8 +64,9 @@ public class ItemEmprestimo {
 	}
 	
 	@JsonDeserialize( using = DateDeserializer.class )
-	public void setDataDevolucao(Date dataDevolucao) {
+	public ItemEmprestimo setDataDevolucao(Date dataDevolucao) {
 		this.dataDevolucao = dataDevolucao;
+		return this;
 	}
 	
 	public Publicacao getPublicacao(){
@@ -74,8 +78,9 @@ public class ItemEmprestimo {
     return this;
   }
 	
-	public void atualizaDevolucao(Date novaData){
+	public ItemEmprestimo atualizaDevolucao(Date novaData){
 		this.dataDevolucao = novaData;
+		return this;
 	}
 
   public Boolean getAtivo() {

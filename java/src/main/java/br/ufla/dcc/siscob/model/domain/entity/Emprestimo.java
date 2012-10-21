@@ -4,7 +4,9 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -35,7 +37,8 @@ public class Emprestimo {
 	@JoinColumn( name = "ID_USUARIO", referencedColumnName = "ID" )
 	private Usuario usuario;
 	
-	@OneToMany(  mappedBy = "emprestimo" )
+	@OneToMany( cascade=CascadeType.ALL, fetch = FetchType.EAGER )
+  @JoinColumn( name = "ID_EMPRESTIMO", referencedColumnName = "ID" )
 	private List<ItemEmprestimo> itens = new ArrayList<ItemEmprestimo>();
 	
 	public Emprestimo(){
