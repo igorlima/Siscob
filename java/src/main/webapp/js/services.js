@@ -26,7 +26,7 @@ factory('Publicacao', ['$resource', function($resource){
 
 angular.module('emprestimoModel', ['ngResource']).
 factory('Emprestimo', ['$resource', function($resource) {
-  return $resource('itememprestimo/:id', {}, {
+  return $resource('emprestimo/:id', {}, {
     all:     {method:'GET'   , params:{}},
     save:    {method:'POST'  , params:{}},
     update:  {method:'PUT'   , params:{}},

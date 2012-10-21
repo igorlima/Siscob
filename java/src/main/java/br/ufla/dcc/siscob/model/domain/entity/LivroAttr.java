@@ -15,7 +15,7 @@ public class LivroAttr {
   
   @Id private Long id;
 	private String autores;
-	private int qtdExemplares;
+	private Long qtdExemplares;
 	
 	public LivroAttr() {
 	  
@@ -48,11 +48,11 @@ public class LivroAttr {
     return this;
   }
 
-  public int getQtdExemplares() {
+  public Long getQtdExemplares() {
     return qtdExemplares;
   }
 
-  public LivroAttr setQtdExemplares(int qtdExemplares) {
+  public LivroAttr setQtdExemplares(Long qtdExemplares) {
     this.qtdExemplares = qtdExemplares;
     return this;
   }

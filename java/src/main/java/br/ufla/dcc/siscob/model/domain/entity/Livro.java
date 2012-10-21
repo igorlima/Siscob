@@ -2,8 +2,6 @@ package br.ufla.dcc.siscob.model.domain.entity;
 
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import org.codehaus.jackson.annotate.JsonIgnoreProperties;
@@ -17,11 +15,7 @@ import br.ufla.dcc.util.SCHEMAS;
 public class Livro extends Publicacao{
 
 	private String autores;
-	private int qtdExemplares;
-	
-	@ManyToOne
-	@JoinColumn( name = "ID_ITEMEMPRESTIMO", referencedColumnName = "ID" )
-	private ItemEmprestimo itemEmprestimo;
+	private Long qtdExemplares;
 	
 	public Livro() {
 	  
@@ -35,10 +29,6 @@ public class Livro extends Publicacao{
 	  .setAno(publicacao.getAno());
 	}
 	
-  public ItemEmprestimo getItemEmprestimo() {
-    return itemEmprestimo;
-  }
-	
 	public String getAutores() {
 		return autores;
 	}
@@ -48,11 +38,11 @@ public class Livro extends Publicacao{
 		return this;
 	}
 	
-	public Integer getQtdExemplares() {
+	public Long getQtdExemplares() {
 		return qtdExemplares;
 	}
 	
-	public Livro setQtdExemplares(Integer qtdExemplares) {
+	public Livro setQtdExemplares(Long qtdExemplares) {
 		this.qtdExemplares = qtdExemplares;
 		return this;
 	}

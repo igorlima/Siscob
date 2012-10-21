@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -12,15 +13,22 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
+import org.codehaus.jackson.map.annotate.JsonDeserialize;
+import org.codehaus.jackson.map.annotate.JsonSerialize;
+
+import br.ufla.dcc.util.DateDeserializer;
+import br.ufla.dcc.util.DateSerializer;
 import br.ufla.dcc.util.SCHEMAS;
 @Entity
 @Table( name = "emprestimo", schema = SCHEMAS.SISCOB )
 public class Emprestimo {
 	
 	@Id
-	private int id;
+	@GeneratedValue
+	private Long id;
 	private Date dataEmprestimo;
 	private Date dataDevolucao;
+	private Boolean ativo;
 	
 	@NotNull
 	@ManyToOne
@@ -30,32 +38,54 @@ public class Emprestimo {
 	@OneToMany(  mappedBy = "emprestimo" )
 	private List<ItemEmprestimo> itens = new ArrayList<ItemEmprestimo>();
 	
-	public void setItens(ArrayList<ItemEmprestimo> itens) {
-		this.itens = itens;
+	public Emprestimo(){
+	  
 	}
 	
-	public Emprestimo(int id, Date dataEmprestimo, Date dataDevolucao, Usuario usuario ){
+	public Emprestimo(Long id, Date dataEmprestimo, Date dataDevolucao, Usuario usuario ) {
 		this.id = id;
 		this.dataDevolucao = dataDevolucao;
 		this.usuario = usuario;
-		dataDevolucao = dataEmprestimo;
+		this.dataEmprestimo = dataEmprestimo;
 	}
 
-	public int getId() {
+	public Long getId() {
 		return id;
 	}
-
+	
+	@JsonSerialize( using = DateSerializer.class )
 	public Date getDataEmprestimo() {
 		return dataEmprestimo;
 	}
+	
+	public Emprestimo setDataEmprestimo(Date dataEmprestimo) {
+	  this.dataEmprestimo = dataEmprestimo;
+	  return this;
+	}
 
+	@JsonSerialize( using = DateSerializer.class )
 	public Date getDataDevolucao() {
 		return dataDevolucao;
+	}
+	
+	@JsonDeserialize( using = DateDeserializer.class )
+	public Emprestimo setDataDevolucao(Date dataDevolucao) {
+	  this.dataDevolucao = dataDevolucao;
+	  return this;
 	}
 
 	public Usuario getUsuario() {
 		return usuario;
 	}
+	
+	public Emprestimo setUsuario(Usuario usuario) {
+	  this.usuario = usuario;
+	  return this;
+	}
+	
+	public void setItens(ArrayList<ItemEmprestimo> itens) {
+    this.itens = itens;
+  }
 	
 	public void adicionarItem(ItemEmprestimo itemEmprestimo) throws Exception{
 			((Livro) itemEmprestimo.getPublicacao()).decrementarQuantidade();
@@ -103,5 +133,19 @@ public class Emprestimo {
 	public List<ItemEmprestimo> getItens() {
 		return itens;
 	}
+	
+	public Emprestimo setItens(List<ItemEmprestimo> itens) {
+    this.itens = itens;
+    return this;
+  }
+
+  public Boolean getAtivo() {
+    return ativo;
+  }
+
+  public Emprestimo setAtivo(Boolean ativo) {
+    this.ativo = ativo;
+    return this;
+  }
 	
 }

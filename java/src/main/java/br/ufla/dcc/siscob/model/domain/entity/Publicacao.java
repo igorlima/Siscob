@@ -13,12 +13,15 @@ import javax.persistence.InheritanceType;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+import org.codehaus.jackson.annotate.JsonIgnoreProperties;
+
 import br.ufla.dcc.util.SCHEMAS;
 @Entity
 @Table( name = "publicacao", schema = SCHEMAS.SISCOB )
 @Inheritance(strategy = InheritanceType.JOINED)
 @DiscriminatorColumn(name = "tipo", discriminatorType = DiscriminatorType.STRING)
 @DiscriminatorValue(value=Publicacao.Publicacao)
+@JsonIgnoreProperties(ignoreUnknown=true)
 public class Publicacao {
   
   @Transient public static final String Livro = "LIVRO";

@@ -10,6 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.jackson.map.annotate.JsonDeserialize;
 import org.codehaus.jackson.map.annotate.JsonSerialize;
 
@@ -32,6 +33,7 @@ public class Usuario {
   private Date dataPenalizacao;
   private Boolean ativo;
   
+  @JsonIgnore
   @OneToMany(mappedBy="usuario" , cascade = CascadeType.ALL)
   private List<Emprestimo> emprestimos;
   
@@ -44,6 +46,7 @@ public class Usuario {
     return this;
   }
   
+  @JsonIgnore
   public List<Emprestimo> getEmprestimos() {
     return emprestimos;
   }
