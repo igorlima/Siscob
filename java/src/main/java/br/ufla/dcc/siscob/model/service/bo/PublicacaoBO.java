@@ -66,6 +66,11 @@ public class PublicacaoBO {
   }
   
   @Transactional(readOnly=true)
+  public ReturnTO recuperar(String tipo) {
+    return new ObjectAndMessageReturnTO<List<Publicacao>>(dao.retrieve(tipo));
+  }
+  
+  @Transactional(readOnly=true)
   public ReturnTO recuperar(Long id) {
     return new ObjectAndMessageReturnTO<Publicacao>(dao.retrieve(id));
   }

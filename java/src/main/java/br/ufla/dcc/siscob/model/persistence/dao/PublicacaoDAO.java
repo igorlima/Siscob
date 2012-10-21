@@ -8,6 +8,7 @@ import br.ufla.lemaf.commons.model.persistence.dao.DAO;
 public interface PublicacaoDAO extends DAO<Publicacao, Long> {
   
   List<Publicacao> retrieve();
+  List<Publicacao> retrieve( String tipo );
   List<Publicacao> buscarPorAutores(String autores);
   List<Publicacao> buscarPorTitulo(String titulo);
   void evict(Publicacao publicacao);

@@ -2,7 +2,7 @@
 
 /* Controllers */
 
-angular.module( 'usuario', ['usuarioModel', 'publicacaoModel'] )
+angular.module( 'controllers', ['usuarioModel', 'publicacaoModel', 'emprestimoModel'] )
 
 .controller( 'UsuarioCtrl', ['$scope', 'Usuario', 
 function(ng, Usuario) {
@@ -161,23 +161,23 @@ function(ng, Publicacao) {
 }])
 
 
-.controller( 'ItemEmprestimoCtrl', ['$scope','ItemEmprestimo','Usuario','Publicacao', 
-function(ng, ItemEmprestimo, Usuario, Publicacao) {
+.controller( 'EmprestimoCtrl', ['$scope','Emprestimo','Usuario','Publicacao', 
+function(ng, Emprestimo, Usuario, Publicacao) {
   
-  var create_a_new_item_emprestimo = function() {
+  var create_a_new_emprestimo = function() {
     return {
       usuario: {},
-      publicacao: {}
+      itens: []
     };
   };
   
-  ng.item_emprestimo = create_a_new_item_emprestimo();
-  
-  ng.item_emprestimos = [];
+  ng.emprestimo = create_a_new_emprestimo();
+  ng.publicacao_selecionada = {};
+  ng.emprestimos = [];
   ng.usuarios = [];
   ng.livros = [];
   
-  Publicacao.all( {tipo:'livros'}, function(data){
+  Publicacao.all( {pathTipo: 'tipo', tipo:'LIVRO'}, function(data){
     ng.livros = data.returnObject;
   });
   
@@ -185,22 +185,28 @@ function(ng, ItemEmprestimo, Usuario, Publicacao) {
     ng.usuarios = data.returnObject;
   });
   
-  var listar_todos_item_emprestimos = function() {
-    ItemEmprestimo.all(function(data){
-      ng.item_emprestimos = data.returnObject;
-      ng.has_item_emprestimos = ng.item_emprestimos.length > 0 ? true : false;
+  var listar_todos_emprestimos = function() {
+    Emprestimo.all(function(data){
+      ng.emprestimos = data.returnObject;
+      ng.has_emprestimos = ng.emprestimos.length > 0 ? true : false;
     });
   };
-  listar_todos_item_emprestimos();
+  listar_todos_emprestimos();
+  
+  ng.adicionarItemEmprestimo = function() {
+    ng.emprestimo.itens.push({
+      publicacao: ng.publicacao_selecionada
+    });
+  };
   
   ng.salvar = function() {
-    ItemEmprestimo.save( {tipo:ng.item_emprestimo.tipo}, ng.item_emprestimo, 
+    Emprestimo.save( {tipo:ng.emprestimo.tipo}, ng.emprestimo, 
       function(data){
         if (data.status=='ERROR') Message.set(true, data.message);
         else{
           Message.set(false, data.message);
-          ng.item_emprestimo = create_a_new_item_emprestimo();
-          listar_todos_item_emprestimos();
+          ng.emprestimo = create_a_new_emprestimo();
+          listar_todos_emprestimos();
         }
       },
       function(data){
@@ -208,14 +214,14 @@ function(ng, ItemEmprestimo, Usuario, Publicacao) {
     });
   };
   
-  ng.editar_item_emprestimo_selecionado = function() {
-    ItemEmprestimo.update( {tipo:ng.item_emprestimo.tipo}, ng.item_emprestimo, 
+  ng.editar_emprestimo_selecionado = function() {
+    Emprestimo.update( {tipo:ng.emprestimo.tipo}, ng.emprestimo, 
       function(data){
         if (data.status=='ERROR') Message.set(true, data.message);
         else{
           Message.set(false, data.message);
-          ng.item_emprestimo = create_a_new_item_emprestimo();
-          listar_todos_item_emprestimos();
+          ng.emprestimo = create_a_new_emprestimo();
+          listar_todos_emprestimos();
         }
       },
       function(data){
@@ -223,30 +229,30 @@ function(ng, ItemEmprestimo, Usuario, Publicacao) {
     });
   };
   
-  ng.editar = function(item_emprestimo) {
-    ng.item_emprestimo.id            = item_emprestimo.id;
-    ng.item_emprestimo.publicacao.id = item_emprestimo.publicacao.id;
-    ng.item_emprestimo.usuario.id    = item_emprestimo.usuario.id;
+  ng.editar = function(emprestimo) {
+    ng.emprestimo.id            = emprestimo.id;
+    ng.emprestimo.publicacao.id = emprestimo.publicacao.id;
+    ng.emprestimo.usuario.id    = emprestimo.usuario.id;
   };
   
-  ng.visualizar = function(item_emprestimo) {
-    ng.item_emprestimo_para_visualizacao = item_emprestimo;
-    ng.item_emprestimo = create_a_new_item_emprestimo();
+  ng.visualizar = function(emprestimo) {
+    ng.emprestimo_para_visualizacao = emprestimo;
+    ng.emprestimo = create_a_new_emprestimo();
   };
   
-  ng.excluir = function(item_emprestimo) {
-    ItemEmprestimo.remove( {id:item_emprestimo.id},
+  ng.excluir = function(emprestimo) {
+    Emprestimo.remove( {id:emprestimo.id},
       function(data) {
         if (data.status=='ERROR') Message.set(true, data.message);
         else{
           Message.set(false, data.message);
-          ng.item_emprestimo = create_a_new_item_emprestimo();
-          listar_todos_item_emprestimos();
+          ng.emprestimo = create_a_new_emprestimo();
+          listar_todos_emprestimos();
         }
       },
       function(data) {
         Message.set(true, data);
-        ng.item_emprestimo = create_a_new_item_emprestimo();
+        ng.emprestimo = create_a_new_emprestimo();
     });
   };
 

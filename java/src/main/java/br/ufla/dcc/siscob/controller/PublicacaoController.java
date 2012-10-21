@@ -70,6 +70,16 @@ public class PublicacaoController extends ApplicationController {
     return publicacaoBO.recuperar();
   }
   
+  @RequestMapping(value = "/publicacao/tipo/LIVRO", method = RequestMethod.GET)
+  public ReturnTO recuperarLivros(){
+    return publicacaoBO.recuperar(Publicacao.Livro);
+  }
+  
+  @RequestMapping(value = "/publicacao/tipo/PERIODICO", method = RequestMethod.GET)
+  public ReturnTO recuperarPeriodicos(){
+    return publicacaoBO.recuperar(Publicacao.Periodico);
+  }
+  
   @RequestMapping(value = "/publicacao/{id}", method = RequestMethod.GET)
   public ReturnTO recuperar(@PathVariable Long id){
     return publicacaoBO.recuperar(id);

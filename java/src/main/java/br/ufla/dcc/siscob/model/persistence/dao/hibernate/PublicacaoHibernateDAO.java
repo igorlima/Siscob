@@ -22,6 +22,13 @@ public class PublicacaoHibernateDAO extends HibernateDAO<Publicacao, Long> imple
     return query.getResultList();
   }
   
+  public List<Publicacao> retrieve( String tipo ){
+    TypedQuery<Publicacao> query = this.entityManager.createQuery("from Publicacao where ativo = :ativo AND tipo = :tipo", Publicacao.class);
+    query.setParameter("ativo", true)
+    .setParameter("tipo", tipo);
+    return query.getResultList();
+  }
+  
 	public List<Publicacao> buscarPorAutores(String autores) {
 	  TypedQuery<Publicacao> query = this.entityManager.createQuery("select * from publicacao where autores like :autores", Publicacao.class);
 		query.setParameter("autores", autores);  

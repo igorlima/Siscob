@@ -15,7 +15,7 @@ factory('Usuario', ['$resource', function($resource){
 
 angular.module('publicacaoModel', ['ngResource']).
 factory('Publicacao', ['$resource', function($resource){
-  return $resource('publicacao/:id/:tipo', {}, {
+  return $resource('publicacao/:id/:pathTipo/:tipo', {}, {
     all:    {method:'GET'   , params:{}},
     save:   {method:'POST'  , params:{}},
     update: {method:'PUT'   , params:{}},
@@ -24,8 +24,8 @@ factory('Publicacao', ['$resource', function($resource){
   });
 }]);
 
-angular.module('itemEmprestimoModel', ['ngResource']).
-factory('ItemEmprestimo', ['$resource', function($resource){
+angular.module('emprestimoModel', ['ngResource']).
+factory('Emprestimo', ['$resource', function($resource) {
   return $resource('itememprestimo/:id', {}, {
     all:     {method:'GET'   , params:{}},
     save:    {method:'POST'  , params:{}},
