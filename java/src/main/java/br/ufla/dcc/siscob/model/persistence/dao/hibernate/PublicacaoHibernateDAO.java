@@ -15,14 +15,21 @@ import br.ufla.lemaf.commons.model.persistence.dao.hibernate.HibernateDAO;
 @DAO( implementation = DAOImplementation.HIBERNATE )
 public class PublicacaoHibernateDAO extends HibernateDAO<Publicacao, Long> implements PublicacaoDAO {
 	
+  @Override
+  public List<Publicacao> retrieve(){
+    TypedQuery<Publicacao> query = this.entityManager.createQuery("from Publicacao where ativo = :ativo", Publicacao.class);
+    query.setParameter("ativo", true);
+    return query.getResultList();
+  }
+  
 	public List<Publicacao> buscarPorAutores(String autores) {
-	  TypedQuery<Publicacao> query = this.entityManager.createQuery( "select * from publicacao where autores like :autores", Publicacao.class );
+	  TypedQuery<Publicacao> query = this.entityManager.createQuery("select * from publicacao where autores like :autores", Publicacao.class);
 		query.setParameter("autores", autores);  
 		return query.getResultList();
 	}
 	
 	public List<Publicacao> buscarPorTitulo(String titulo) {
-	  TypedQuery<Publicacao> query = this.entityManager.createQuery( "select * from publicacao where titulo like :titulo", Publicacao.class );
+	  TypedQuery<Publicacao> query = this.entityManager.createQuery("select * from publicacao where titulo like :titulo", Publicacao.class);
 		query.setParameter("titulo", titulo);  
 		return query.getResultList();  
 	}

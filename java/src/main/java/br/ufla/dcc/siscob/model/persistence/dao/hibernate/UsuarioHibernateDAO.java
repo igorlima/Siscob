@@ -14,6 +14,13 @@ import br.ufla.lemaf.commons.model.persistence.dao.hibernate.HibernateDAO;
 @Named
 @DAO( implementation = DAOImplementation.HIBERNATE )
 public class UsuarioHibernateDAO extends HibernateDAO<Usuario, Long> implements UsuarioDAO {
+  
+  @Override 
+  public List<Usuario> retrieve(){
+    TypedQuery<Usuario> query = this.entityManager.createQuery("from Usuario where ativo = :ativo", Usuario.class);
+    query.setParameter("ativo", true);
+    return query.getResultList();
+  };
 	
 	public List<Usuario> listaUsuarioPorNome(String nome) {
 	  TypedQuery<Usuario> query = this.entityManager.createQuery( "from Usuario where nome like :nome", Usuario.class);

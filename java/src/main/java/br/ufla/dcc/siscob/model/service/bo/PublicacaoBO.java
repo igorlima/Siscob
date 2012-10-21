@@ -34,7 +34,7 @@ public class PublicacaoBO {
 
   @Transactional
   public ReturnTO salvar(Publicacao publicacao) {
-    dao.createOrUpdate(publicacao);
+    dao.createOrUpdate(publicacao.setAtivo(true));
     return new MessageReturnTO();
   }
   
@@ -56,7 +56,7 @@ public class PublicacaoBO {
   
   @Transactional
   public ReturnTO excluir(Long id) {
-    dao.delete( dao.retrieve(id) );
+    dao.retrieve(id).setAtivo(false);
     return new MessageReturnTO();
   }
   

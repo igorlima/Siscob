@@ -31,7 +31,8 @@ public class Publicacao {
 	private String titulo;
 	private String editora;
 	private String ano;
-	@Column(nullable=false)
+	private Boolean ativo;
+	@Column(nullable=false) 
 	private String tipo;
 	
 	public Long getId() {
@@ -78,5 +79,14 @@ public class Publicacao {
 		this.ano = ano;
 		return this;
 	}
+
+  public Boolean getAtivo() {
+    return ativo;
+  }
+
+  public Publicacao setAtivo(Boolean ativo) {
+    this.ativo = ativo;
+    return this;
+  }
 
 }

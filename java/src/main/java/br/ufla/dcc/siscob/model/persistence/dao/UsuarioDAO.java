@@ -7,6 +7,7 @@ import br.ufla.lemaf.commons.model.persistence.dao.DAO;
 
 public interface UsuarioDAO extends DAO<Usuario, Long> {
   
+  List<Usuario> retrieve();
   List<Usuario> listaUsuarioPorNome(String nome);
   Usuario buscaPorCpf(String cpf);
   

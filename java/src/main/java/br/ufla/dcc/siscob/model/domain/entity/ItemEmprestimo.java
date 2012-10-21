@@ -21,6 +21,7 @@ public class ItemEmprestimo {
 	private Long id;
 	
   private Date dataDevolucao;
+  private Boolean ativo;
   
 	@ManyToOne( cascade = {CascadeType.PERSIST, CascadeType.MERGE}, targetEntity=Publicacao.class )
 	@JoinColumn(name="ID_PUBLICACAO", nullable=false)
@@ -62,5 +63,14 @@ public class ItemEmprestimo {
 	public void atualizaDevolucao(Date novaData){
 		this.dataDevolucao = novaData;
 	}
+
+  public Boolean getAtivo() {
+    return ativo;
+  }
+
+  public ItemEmprestimo setAtivo(Boolean ativo) {
+    this.ativo = ativo;
+    return this;
+  }
 
 }

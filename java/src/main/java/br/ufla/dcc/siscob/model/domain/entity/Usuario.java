@@ -30,6 +30,7 @@ public class Usuario {
   private String cpf;
   private String telefone;
   private Date dataPenalizacao;
+  private Boolean ativo;
   
   @OneToMany(mappedBy="usuario" , cascade = CascadeType.ALL)
   private List<Emprestimo> emprestimos;
@@ -96,6 +97,15 @@ public class Usuario {
   @JsonDeserialize( using = DateDeserializer.class )
   public Usuario setDataPenalizacao(Date dataPenalizacao) {
     this.dataPenalizacao = dataPenalizacao;
+    return this;
+  }
+
+  public Boolean getAtivo() {
+    return ativo;
+  }
+
+  public Usuario setAtivo(Boolean ativo) {
+    this.ativo = ativo;
     return this;
   }
 

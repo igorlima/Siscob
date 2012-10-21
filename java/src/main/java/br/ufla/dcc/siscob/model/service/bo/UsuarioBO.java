@@ -23,7 +23,7 @@ public class UsuarioBO {
 
   @Transactional
   public ReturnTO salvar(Usuario usuario) {
-    dao.createOrUpdate(usuario);
+    dao.createOrUpdate(usuario.setAtivo(true));
     return new MessageReturnTO();
   }
   
@@ -40,7 +40,7 @@ public class UsuarioBO {
   
   @Transactional
   public ReturnTO excluir(Long id) {
-    dao.delete(dao.retrieve(id));
+    dao.retrieve(id).setAtivo(false);
     return new MessageReturnTO();
   }
   
