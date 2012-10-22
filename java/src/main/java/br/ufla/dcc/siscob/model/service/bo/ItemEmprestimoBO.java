@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import br.ufla.dcc.siscob.model.domain.entity.ItemEmprestimo;
 import br.ufla.dcc.siscob.model.domain.entity.Publicacao;
+import br.ufla.dcc.siscob.model.domain.entity.Usuario;
 import br.ufla.dcc.siscob.model.persistence.dao.ItemEmprestimoDAO;
 import br.ufla.lemaf.commons.model.persistence.dao.annotation.DAO;
 import br.ufla.lemaf.commons.model.persistence.dao.annotation.DAOImplementation;
@@ -55,6 +56,11 @@ public class ItemEmprestimoBO {
   @Transactional(readOnly=true)
   public Boolean hasEmprestimo(Publicacao publicacao) {
     return dao.hasEmprestimo(publicacao);
+  }
+  
+  @Transactional(readOnly=true)
+  public Boolean hasEmprestimo(Usuario usuario) {
+    return dao.hasEmprestimo(usuario);
   }
   
 }
