@@ -14,12 +14,14 @@ import br.ufla.lemaf.commons.model.persistence.dao.annotation.DAOImplementation;
 import br.ufla.lemaf.commons.model.service.to.MessageReturnTO;
 import br.ufla.lemaf.commons.model.service.to.ObjectAndMessageReturnTO;
 import br.ufla.lemaf.commons.model.service.to.ReturnTO;
+import br.ufla.lemaf.commons.model.service.to.ReturnTO.Status;
 
 @Named
 public class UsuarioBO {
 
   @DAO( implementation = DAOImplementation.HIBERNATE )
   @Inject private UsuarioDAO dao;
+  @Inject private ItemEmprestimoBO itemEmprestimoBO;
 
   @Transactional
   public ReturnTO salvar(Usuario usuario) {
@@ -40,8 +42,12 @@ public class UsuarioBO {
   
   @Transactional
   public ReturnTO excluir(Long id) {
-    dao.retrieve(id).setAtivo(false);
-    return new MessageReturnTO();
+    if (itemEmprestimoBO.hasEmprestimo(new Usuario().setId(id))) {
+      return new MessageReturnTO(Status.ERROR, "Esse usuário possui empréstimo(s). Não é possível excluí-lo.");
+    } else {
+      dao.retrieve(id).setAtivo(false);
+      return new MessageReturnTO();
+    }
   }
   
   @Transactional(readOnly=true)

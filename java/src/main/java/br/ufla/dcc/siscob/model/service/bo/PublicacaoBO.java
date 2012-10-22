@@ -18,6 +18,7 @@ import br.ufla.lemaf.commons.model.persistence.dao.annotation.DAOImplementation;
 import br.ufla.lemaf.commons.model.service.to.MessageReturnTO;
 import br.ufla.lemaf.commons.model.service.to.ObjectAndMessageReturnTO;
 import br.ufla.lemaf.commons.model.service.to.ReturnTO;
+import br.ufla.lemaf.commons.model.service.to.ReturnTO.Status;
 
 @Named
 public class PublicacaoBO {
@@ -30,6 +31,8 @@ public class PublicacaoBO {
   
   @DAO( implementation = DAOImplementation.HIBERNATE )
   @Inject private PeriodicoAttrDAO PeriodicoAttrDAO;
+  
+  @Inject private ItemEmprestimoBO itemEmprestimoBO;
 
   @Transactional
   public ReturnTO salvar(Publicacao publicacao) {
@@ -55,8 +58,12 @@ public class PublicacaoBO {
   
   @Transactional
   public ReturnTO excluir(Long id) {
-    dao.retrieve(id).setAtivo(false);
-    return new MessageReturnTO();
+    if (itemEmprestimoBO.hasEmprestimo(new Publicacao().setId(id))) {
+      return new MessageReturnTO(Status.ERROR, "Existe algum empréstimo com essa obra. Não é possível excluí-la.");
+    } else {
+      dao.retrieve(id).setAtivo(false);
+      return new MessageReturnTO();
+    }
   }
   
   @Transactional(readOnly=true)
