@@ -48,8 +48,8 @@ public class PublicacaoHibernateDAO extends HibernateDAO<Publicacao, Long> imple
   }
 	
 	public Long qteDisponiveis(Publicacao publicacao) {
-	  String emprestado = " (SELECT count(*) as qte FROM ItemEmprestimo i, Emprestimo e WHERE e.id = i.id_emprestimo AND e.ativo = :ativo AND i.datadadevolucao IS NULL AND i.id_emprestimo IS NOT NULL AND i.id_publicacao = :id) as emprestado ";
-	  String total = " (SELECT qtdexemplares as qte FROM Livro l WHERE l.id = :id) as total ";
+	  String emprestado = " (SELECT count(*) as qte FROM siscob.itememprestimo i, siscob.emprestimo e WHERE e.id = i.id_emprestimo AND e.ativo = :ativo AND i.datadadevolucao IS NULL AND i.id_emprestimo IS NOT NULL AND i.id_publicacao = :id) as emprestado ";
+	  String total = " (SELECT qtdexemplares as qte FROM siscob.livro l WHERE l.id = :id) as total ";
 	  Query query = this.entityManager.createNativeQuery("select total.qte - emprestado.qte from " + emprestado + ", " + total);
 	  BigInteger qte = (BigInteger) query.setParameter("id", publicacao.getId()).setParameter("ativo", true).getSingleResult(); 
 	  return qte.longValue();

@@ -18,7 +18,7 @@ public class ItemEmprestimoHibernateDAO extends HibernateDAO<ItemEmprestimo, Lon
   
   public Boolean hasEmprestimo(Publicacao publicacao) {
     try {
-      Query query = this.entityManager.createNativeQuery("SELECT * FROM ItemEmprestimo i, Emprestimo e WHERE e.id = i.id_emprestimo AND e.ativo = :ativo AND i.datadadevolucao IS NULL AND i.id_publicacao = :id AND i.id_emprestimo IS NOT NULL", ItemEmprestimo.class);
+      Query query = this.entityManager.createNativeQuery("SELECT * FROM siscob.itememprestimo i, siscob.emprestimo e WHERE e.id = i.id_emprestimo AND e.ativo = :ativo AND i.datadadevolucao IS NULL AND i.id_publicacao = :id AND i.id_emprestimo IS NOT NULL", ItemEmprestimo.class);
       ItemEmprestimo item = (ItemEmprestimo) query.setMaxResults(1).setParameter("id", publicacao.getId()).setParameter("ativo", true).getSingleResult();
       return item==null ? false : true;
     } catch (NoResultException e) {
@@ -29,7 +29,7 @@ public class ItemEmprestimoHibernateDAO extends HibernateDAO<ItemEmprestimo, Lon
   
   public Boolean hasEmprestimo(Usuario usuario) {
     try {
-      Query query = this.entityManager.createNativeQuery("SELECT * FROM Emprestimo e, ItemEmprestimo i WHERE i.id_emprestimo = e.id AND e.ativo = :ativo AND i.datadadevolucao IS NULL AND e.id_usuario = :id");
+      Query query = this.entityManager.createNativeQuery("SELECT * FROM siscob.emprestimo e, siscob.itememprestimo i WHERE i.id_emprestimo = e.id AND e.ativo = :ativo AND i.datadadevolucao IS NULL AND e.id_usuario = :id");
       Object exists = (Object) query.setMaxResults(1).setParameter("id", usuario.getId()).setParameter("ativo", true).getSingleResult();
       return exists==null ? false : true;
     } catch (NoResultException e) {
