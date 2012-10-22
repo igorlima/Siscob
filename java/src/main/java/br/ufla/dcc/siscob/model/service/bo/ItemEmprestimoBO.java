@@ -9,6 +9,7 @@ import javax.inject.Named;
 import org.springframework.transaction.annotation.Transactional;
 
 import br.ufla.dcc.siscob.model.domain.entity.ItemEmprestimo;
+import br.ufla.dcc.siscob.model.domain.entity.Publicacao;
 import br.ufla.dcc.siscob.model.persistence.dao.ItemEmprestimoDAO;
 import br.ufla.lemaf.commons.model.persistence.dao.annotation.DAO;
 import br.ufla.lemaf.commons.model.persistence.dao.annotation.DAOImplementation;
@@ -49,6 +50,11 @@ public class ItemEmprestimoBO {
     }
     
     return new MessageReturnTO();
+  }
+  
+  @Transactional(readOnly=true)
+  public Boolean hasEmprestimo(Publicacao publicacao) {
+    return dao.hasEmprestimo(publicacao);
   }
   
 }

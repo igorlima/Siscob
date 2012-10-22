@@ -7,6 +7,7 @@ import javax.inject.Named;
 import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 
+import br.ufla.dcc.siscob.model.domain.entity.ItemEmprestimo;
 import br.ufla.dcc.siscob.model.domain.entity.Publicacao;
 import br.ufla.dcc.siscob.model.persistence.dao.PublicacaoDAO;
 import br.ufla.lemaf.commons.model.persistence.dao.annotation.DAO;
@@ -54,5 +55,5 @@ public class PublicacaoHibernateDAO extends HibernateDAO<Publicacao, Long> imple
 	  BigInteger qte = (BigInteger) query.setParameter("id", publicacao.getId()).getSingleResult(); 
 	  return qte.longValue();
 	}
-	
+
 }
