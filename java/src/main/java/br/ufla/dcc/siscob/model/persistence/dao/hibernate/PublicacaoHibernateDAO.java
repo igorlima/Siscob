@@ -1,8 +1,10 @@
 package br.ufla.dcc.siscob.model.persistence.dao.hibernate;
 
+import java.math.BigInteger;
 import java.util.List;
 
 import javax.inject.Named;
+import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 
 import br.ufla.dcc.siscob.model.domain.entity.Publicacao;
@@ -44,5 +46,13 @@ public class PublicacaoHibernateDAO extends HibernateDAO<Publicacao, Long> imple
 	public void evict(Publicacao publicacao) {
     this.getSession().evict(publicacao);
   }
+	
+	public Long qteDisponiveis(Publicacao publicacao) {
+	  String emprestado = " (SELECT count(*) as qte FROM ItemEmprestimo i WHERE i.datadadevolucao IS NULL AND i.id_emprestimo IS NOT NULL AND i.id_publicacao = :id) as emprestado ";
+	  String total = " (SELECT qtdexemplares as qte FROM Livro l WHERE l.id = :id) as total ";
+	  Query query = this.entityManager.createNativeQuery("select total.qte - emprestado.qte from " + emprestado + ", " + total);
+	  BigInteger qte = (BigInteger) query.setParameter("id", publicacao.getId()).getSingleResult(); 
+	  return qte.longValue();
+	}
 	
 }

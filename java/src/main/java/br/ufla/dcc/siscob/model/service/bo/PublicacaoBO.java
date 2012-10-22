@@ -6,7 +6,6 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.PathVariable;
 
 import br.ufla.dcc.siscob.model.domain.entity.LivroAttr;
 import br.ufla.dcc.siscob.model.domain.entity.PeriodicoAttr;
@@ -81,8 +80,13 @@ public class PublicacaoBO {
   }
   
   @Transactional(readOnly=true)
-  public ReturnTO recuperarPorTitulo(@PathVariable String titulo) {
+  public ReturnTO recuperarPorTitulo(String titulo) {
     return new ObjectAndMessageReturnTO<List<Publicacao>>(dao.buscarPorTitulo(titulo));
+  }
+  
+  @Transactional(readOnly=true)
+  public Long qteDisponivel(Publicacao publicacao) {
+    return dao.qteDisponiveis(publicacao);
   }
   
 }
