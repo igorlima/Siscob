@@ -66,7 +66,8 @@
     <tr>
       <th>#</th>
       <th>Usuário</th>
-      <th>Qde de itens</th>
+      <th>Total</th>
+      <th>Devolvidos</th>
       <th>Ações</th>
     </tr>
   </thead>
@@ -75,6 +76,7 @@
       <td>{{emprestimo.id}}</td>
       <td>{{emprestimo.usuario.nome}}</td>
       <td>{{emprestimo.itens.length}}</td>
+      <td>{{qte_devolvidos(emprestimo.itens)}}</td>
       <td>
         <a class="btn btn-mini btn-primary" ng-click="editar(emprestimo)"   rel="tooltip" title="editar"><i class="icon-edit icon-white"></i></a>
         <a href="#visualizarEmprestimo" class="btn btn-mini btn-info"  data-toggle="modal" rel="tooltip" title="visualizar" ng-click="selecionar(emprestimo)"><i class="icon-search icon-white"></i></a>

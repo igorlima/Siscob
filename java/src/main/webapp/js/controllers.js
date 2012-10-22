@@ -306,5 +306,13 @@ function(ng, Emprestimo, ItemEmprestimo, Usuario, Publicacao) {
     });
   };
   
+  ng.qte_devolvidos = function(itens) {
+    var qte_devolvidos = 0;
+    angular.forEach( itens, function(item){
+      if (item.dataDaDevolucao!=null) qte_devolvidos++;
+    });
+    return qte_devolvidos;
+  };
+  
 
 }]);
