@@ -122,7 +122,7 @@ public class ItemEmprestimo {
   }
 
   public Boolean getDevolver() {
-    return devolver;
+    return devolver==null?false:devolver;
   }
 
   public ItemEmprestimo setDevolver(Boolean devolver) {
@@ -131,7 +131,7 @@ public class ItemEmprestimo {
   }
   
   public Boolean getDevolvido() {
-    return devolvido;
+    return devolvido==null?false:devolvido;
   }
 
   public ItemEmprestimo setDevolvido(Boolean devolvido) {
@@ -140,7 +140,7 @@ public class ItemEmprestimo {
   }
 
   public Boolean getRenovar() {
-    return renovar;
+    return renovar==null?false:renovar;
   }
 
   public ItemEmprestimo setRenovar(Boolean renovar) {

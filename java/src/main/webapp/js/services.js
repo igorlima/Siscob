@@ -31,7 +31,15 @@ factory('Emprestimo', ['$resource', function($resource) {
     save:    {method:'POST'  , params:{}},
     update:  {method:'PUT'   , params:{}},
     get:     {method:'GET'   , params:{id:'@id'}},
-    devolve: {method:'PUT'   , params:{id:'@id'}},
     remove:  {method:'DELETE', params:{id:'@id'}}
   });
 }]);
+
+angular.module('itemEmprestimoModel', ['ngResource']).
+factory('ItemEmprestimo', ['$resource', function($resource) {
+  return $resource('itememprestimo/:act', {}, {
+    devolve: {method:'PUT', params:{act:'devolucao'}},
+    renew:   {method:'PUT', params:{act:'renovacao'}}
+  });
+}]);
+

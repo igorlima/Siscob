@@ -2,7 +2,7 @@
 
 /* Controllers */
 
-angular.module( 'controllers', ['usuarioModel', 'publicacaoModel', 'emprestimoModel'] )
+angular.module( 'controllers', ['usuarioModel', 'publicacaoModel', 'emprestimoModel', 'itemEmprestimoModel'] )
 
 .controller( 'UsuarioCtrl', ['$scope', 'Usuario', 
 function(ng, Usuario) {
@@ -169,8 +169,8 @@ function(ng, Publicacao) {
 }])
 
 
-.controller( 'EmprestimoCtrl', ['$scope','Emprestimo','Usuario','Publicacao', 
-function(ng, Emprestimo, Usuario, Publicacao) {
+.controller( 'EmprestimoCtrl', ['$scope','Emprestimo','ItemEmprestimo','Usuario','Publicacao', 
+function(ng, Emprestimo, ItemEmprestimo, Usuario, Publicacao) {
   
   var create_a_new_emprestimo = function() {
     ng.publicacao_selecionada = {};
@@ -273,5 +273,38 @@ function(ng, Emprestimo, Usuario, Publicacao) {
         ng.emprestimo = create_a_new_emprestimo();
     });
   };
+  
+  ng.devolver_emprestimo_selecionado = function() {
+    ItemEmprestimo.devolve( {act:'devolucao'}, ng.emprestimo_selecionado, 
+      function(data) {
+        if (data.status=='ERROR') Message.set(true, data.message);
+        else{
+          Message.set(false, data.message);
+          listar_todos_emprestimos();
+          $('#devolverEmprestimo').find('a[data-dismiss=modal]').click();
+        }
+      },
+      function(data) {
+        Message.set(true, data);
+        $('#devolverEmprestimo').find('a[data-dismiss=modal]').click();
+    });
+  };
+  
+  ng.renovar_emprestimo_selecionado = function() {
+    ItemEmprestimo.renew( {act:'renovacao'}, ng.emprestimo_selecionado, 
+      function(data) {
+        if (data.status=='ERROR') Message.set(true, data.message);
+        else{
+          Message.set(false, data.message);
+          listar_todos_emprestimos();
+          $('#renovarEmprestimo').find('a[data-dismiss=modal]').click();
+        }
+      },
+      function(data) {
+        Message.set(true, data);
+        $('#renovarEmprestimo').find('a[data-dismiss=modal]').click();
+    });
+  };
+  
 
 }]);

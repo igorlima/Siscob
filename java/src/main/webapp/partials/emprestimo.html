@@ -31,7 +31,7 @@
         <thead>
           <tr>
             <th>Título</th>
-            <th>Data para a devolução</th>
+            <th>Devolução para</th>
             <th>Ações</th>
           </tr>
         </thead>
@@ -101,13 +101,15 @@
       <thead>
         <tr>
           <th>Título</th>
-          <th>Data para a devolução</th>
+          <th>Devolução para</th>
+          <th>Devolvido em</th>
         </tr>
       </thead>
       <tbody>
         <tr ng-repeat="item in emprestimo_selecionado.itens">
           <td>{{item.publicacao.titulo}}</td>
           <td>{{item.dataParaDevolucao}}</td>
+          <td>{{item.dataDaDevolucao}}</td>
         </tr>
       </tbody>
     </table>
@@ -134,7 +136,7 @@
           <td>
             <input type="checkbox" ng-model="item.devolver" ng-disabled="item.dataDaDevolucao!=null"> 
             {{item.publicacao.titulo}} 
-            <strong ng-show="item.dataDaDevolucao!=null">DEVOLVIDO</strong>
+            <strong ng-show="item.dataDaDevolucao!=null">(DEVOLVIDO)</strong>
           </td>
         </tr>
       </tbody>
@@ -164,7 +166,7 @@
           <td>
             <input type="checkbox" ng-model="item.renovar" ng-disabled="item.dataDaDevolucao!=null"> 
             {{item.publicacao.titulo}}
-            <strong ng-show="item.dataDaDevolucao!=null">DEVOLVIDO</strong>
+            <strong ng-show="item.dataDaDevolucao!=null">(DEVOLVIDO)</strong>
           </td>
           <td><input type="text" placeholder="Data Devolução" ng-show="item.renovar" ng-model="item.dataParaDevolucao"></td>
         </tr>
