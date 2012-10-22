@@ -7,7 +7,6 @@ import javax.inject.Named;
 import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 
-import br.ufla.dcc.siscob.model.domain.entity.ItemEmprestimo;
 import br.ufla.dcc.siscob.model.domain.entity.Publicacao;
 import br.ufla.dcc.siscob.model.persistence.dao.PublicacaoDAO;
 import br.ufla.lemaf.commons.model.persistence.dao.annotation.DAO;
@@ -49,10 +48,10 @@ public class PublicacaoHibernateDAO extends HibernateDAO<Publicacao, Long> imple
   }
 	
 	public Long qteDisponiveis(Publicacao publicacao) {
-	  String emprestado = " (SELECT count(*) as qte FROM ItemEmprestimo i WHERE i.datadadevolucao IS NULL AND i.id_emprestimo IS NOT NULL AND i.id_publicacao = :id) as emprestado ";
+	  String emprestado = " (SELECT count(*) as qte FROM ItemEmprestimo i, Emprestimo e WHERE e.id = i.id_emprestimo AND e.ativo = :ativo AND i.datadadevolucao IS NULL AND i.id_emprestimo IS NOT NULL AND i.id_publicacao = :id) as emprestado ";
 	  String total = " (SELECT qtdexemplares as qte FROM Livro l WHERE l.id = :id) as total ";
 	  Query query = this.entityManager.createNativeQuery("select total.qte - emprestado.qte from " + emprestado + ", " + total);
-	  BigInteger qte = (BigInteger) query.setParameter("id", publicacao.getId()).getSingleResult(); 
+	  BigInteger qte = (BigInteger) query.setParameter("id", publicacao.getId()).setParameter("ativo", true).getSingleResult(); 
 	  return qte.longValue();
 	}
 
